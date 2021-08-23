@@ -33,7 +33,7 @@ export const basePieOption = (
     value: item.value
   }));
   dataList.forEach(v => {
-    sum += Number(v.value);
+    sum += v.value;
   });
   return {
     title: {

@@ -14,9 +14,8 @@ export const baseBarLineOption = (
   data = [],
   outOptions = { isDoubleY: false, splitNumber: 4, unit: [] },
   type = 0,
-  icon,
-  min,
-  threshold
+  icon = 0,
+  threshold = 1
 ) => {
   return {
     color: colors,
@@ -29,13 +28,9 @@ export const baseBarLineOption = (
       formatter: function (params) {
         var relVal = params[0].name;
         var Img = '';
-        if (icon === 1 && parseFloat(params[1].value) > threshold) {
+        if (icon) {
           Img =
             '<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>';
-        }
-        if (icon === 1 && parseFloat(params[1].value) <= min) {
-          Img =
-            '<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>';
         }
         for (var i = 0, l = params.length; i < l; i++) {
           relVal +=
@@ -44,6 +39,9 @@ export const baseBarLineOption = (
             ' : ' +
             params[i].value +
             outOptions.unit[i];
+          if (icon && params[i].value < threshold) {
+            Img = '';
+          }
         }
         return relVal + Img;
       },
@@ -82,7 +80,7 @@ export const baseBarLineOption = (
       axisLabel: {
         interval: 0,
         show: true,
-        rotate: (type === 3 || type === 1) ? 0 : 40, // 亩均论英雄  亩均税收情况是横着显示
+        rotate: type === 3 || type === 1 ? 0 : 40, // 亩均论英雄  亩均税收情况是横着显示
         textStyle: {
           color: '#fff',
           fontSize: 10

@@ -26,10 +26,10 @@ export const titleData = {
 
 export const addIndustryData = {
   name: '数字经济核心产业增加值',
-  zb_hy: '1.定义：规模以上企业数字经济核心产业的增加值。2.反映我市规上数字经济核心产业净增加值情况。',
-  cjfz: '41亿元',
+  zbyy: '1.定义：规模以上企业数字经济核心产业的增加值。2.反映我市规上数字经济核心产业净增加值情况。',
+  cjyz: '41亿元',
   cjcs: '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。',
-  yzfz: '47亿元',
+  yzyy: '47亿元',
   gxpl: '年度',
   gxfs: '手工填报',
   gxsj: '次年三月',
@@ -41,10 +41,10 @@ export const addIndustryData = {
 };
 export const addIndustryDataRate = {
   name: '数字经济核心产业增加值增速',
-  zb_hy: '1.定义：规模以上数字经济核心产业增加值较去年核心产业增加值的增速情况。2.反映我市规上数字经济核心产业的发展增速情况',
-  cjfz: '5%',
+  zbyy: '1.定义：规模以上数字经济核心产业增加值较去年核心产业增加值的增速情况。2.反映我市规上数字经济核心产业的发展增速情况',
+  cjyz: '5%',
   cjcs: '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。',
-  yzfz: '15%',
+  yzyy: '15%',
   gxpl: '年度',
   gxfs: '手工填报',
   gxsj: '次年三月',
@@ -56,11 +56,11 @@ export const addIndustryDataRate = {
 };
 export const countyData = { // 核心制造业增加值区县情况
   name: '规上数字经济核心制造业增加值区县情况',
-  zb_hy:
+  zbyy:
     '1.定义：各县（市、区）、开发区核心制造业增加值柱状图     2.直观反映各地核心制造业的发展水平。',
-  cjfz: '/',
+  cjyz: '/',
   cjcs: '/',
-  yzfz: '/',
+  yzyy: '/',
   gxpl: '年度',
   gxfs: '手工填报',
   gxsj: '次年三月',
@@ -73,11 +73,11 @@ export const countyData = { // 核心制造业增加值区县情况
 
 export const coreMakeData = { // 核心制造业增加值排名
   name: '数字经济核心制造业增加值排名',
-  zb_hy:
+  zbyy:
     '1.定义：各县（市、区）、开发区核心制造业增加值排名情况   2.直观反映各地核心制造业发展速度排名',
-  cjfz: '/',
+  cjyz: '/',
   cjcs: '/',
-  yzfz: '/',
+  yzyy: '/',
   gxpl: '年度',
   gxfs: '手工填报',
   gxsj: '次年三月',
@@ -90,11 +90,11 @@ export const coreMakeData = { // 核心制造业增加值排名
 
 export const developmentData = {
   name: '数字经济发展综合评价指数',
-  zb_hy:
+  zbyy:
     '1.定义:根据《2018浙江省数字经济发展综合评价报告》《浙江省数字经济发展综合评价办法（试行）》，对全市年度数字经济发展情况，从基础设施、数字产业化、产业数字化、新业态新模式和政府与社会化五个方面进行综合评估。2.反映我市数字经济总体发展情况。',
-  cjfz: '73',
+  cjyz: '73',
   cjcs: '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。',
-  yzfz: '75',
+  yzyy: '75',
   gxpl: '年度',
   gxfs: '手工填报',
   gxsj: '次年省文件下发日（12月）',
@@ -107,11 +107,11 @@ export const developmentData = {
 
 export const numberMoneyData = { // 数字经济发展综合评价排名
   name: '数字经济发展综合评价排名',
-  zb_hy:
+  zbyy:
     '1.定义：各县（市、区）、开发区数字经济综合发展情况排名情况   2.直观反映各地数字经济发展情况',
-  cjfz: '/',
+  cjyz: '/',
   cjcs: '/',
-  yzfz: '/',
+  yzyy: '/',
   gxpl: '年度',
   gxfs: '手工填报',
   gxsj: '次年三月',
@@ -123,11 +123,11 @@ export const numberMoneyData = { // 数字经济发展综合评价排名
 };
 export const cloudData = {
   name: '新增上云企业家数',
-  zb_hy:
+  zbyy:
     '1.定义：新增以互联网为基础进行信息化基础设施、管理、业务等方面应用，并通过互联网与云计算手段连接社会化资源、共享服务及能力的企业数。2.反映我市企业数字化转型情况。',
-  cjfz: '/',
+  cjyz: '/',
   cjcs: '/',
-  yzfz: '/',
+  yzyy: '/',
   gxpl: '年度',
   gxfs: '手工填报',
   gxsj: '次年三月',
@@ -139,11 +139,11 @@ export const cloudData = {
 };
 export const addManufacturingData = {
   name: '数字经济核心制造业增加值',
-  zb_hy:
+  zbyy:
     '1.定义：规模以上企业数字经济核心制造业的增加值。2.反映我市规上数字经济核心制造业净增加值情况。',
-  cjfz: '10亿元',
+  cjyz: '10亿元',
   cjcs: '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。',
-  yzfz: '12亿元',
+  yzyy: '12亿元',
   gxpl: '月度',
   gxfs: '手工填报',
   gxsj: '每月最后一天',
@@ -155,11 +155,11 @@ export const addManufacturingData = {
 };
 export const addManufacturingDataRate = {
   name: '数字经济核心制造业增加值增速',
-  zb_hy:
+  zbyy:
     '1.定义：规模以上数字经济核心制造业增加值较去年核心制造业增加值的增速情况 。2.反映我市规上数字经济核心制造业的发展增速情况。',
-  cjfz: '5%',
+  cjyz: '5%',
   cjcs: '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。',
-  yzfz: '15%',
+  yzyy: '15%',
   gxpl: '月度',
   gxfs: '手工填报',
   gxsj: '每月最后一天',
@@ -172,11 +172,11 @@ export const addManufacturingDataRate = {
 export const addManufacturingCountyData = [
   {
     name: '规上数字经济核心制造业增加值',
-    zb_hy:
+    zbyy:
       '1.定义：规模以上企业数字经济核心制造业的增加值。2.反映我市规上数字经济核心制造业净增加值情况。',
-    cjfz: '低于年度目标',
+    cjyz: '低于年度目标',
     cjcs: '/',
-    yzfz: '全省前三',
+    yzyy: '全省前三',
     gxpl: '月度',
     gxfs: '手工填报',
     gxsj: '每月最后一天',
@@ -188,11 +188,11 @@ export const addManufacturingCountyData = [
   },
   {
     name: '规上数字经济核心制造业增加值增速',
-    zb_hy:
+    zbyy:
       '1.定义：规模以上数字经济核心制造业增加值较去年核心制造业增加值的增速情况 。2.反映我市规上数字经济核心制造业的发展增速情况。',
-    cjfz: '5%',
+    cjyz: '5%',
     cjcs: '/',
-    yzfz: '全省前三',
+    yzyy: '全省前三',
     gxpl: '月度',
     gxfs: '手工填报',
     gxsj: '每月最后一天',
@@ -207,11 +207,11 @@ export const addManufacturingCountyData = [
 export const middleTitleData = [
   {
     name: '数字经济核心产业增加值',
-    zb_hy:
+    zbyy:
       '1.定义：规模以上企业数字经济核心产业的增加值。2.反映我市规上数字经济核心产业净增加值情况。',
-    cjfz: '41亿元',
+    cjyz: '41亿元',
     cjcs: '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。',
-    yzfz: '47亿元',
+    yzyy: '47亿元',
     gxpl: '年度',
     gxfs: '手工填报',
     gxsj: '次年三月',
@@ -222,12 +222,12 @@ export const middleTitleData = [
     // lxfs2: '2091689'
   },
   {
-    name: '数字经济核心制造业增加值',
-    zb_hy:
+    name: '规上数字经济核心制造业增加值',
+    zbyy:
       '1.定义：规模以上企业数字经济核心制造业的增加值。2.反映我市规上数字经济核心制造业净增加值情况。',
-    cjfz: '10亿元',
+    cjyz: '10亿元',
     cjcs: '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。',
-    yzfz: '12亿元',
+    yzyy: '12亿元',
     gxpl: '月度',
     gxfs: '手工填报',
     gxsj: '每月最后一天',
@@ -239,11 +239,11 @@ export const middleTitleData = [
   },
   {
     name: '数字经济发展综合评价指数',
-    zb_hy:
+    zbyy:
       '1.定义:根据《2018浙江省数字经济发展综合评价报告》《浙江省数字经济发展综合评价办法（试行）》，对全市年度数字经济发展情况，从基础设施、数字产业化、产业数字化、新业态新模式和政府与社会化五个方面进行综合评估。2.反映我市数字经济总体发展情况。',
-    cjfz: '73',
+    cjyz: '73',
     cjcs: '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。',
-    yzfz: '75',
+    yzyy: '75',
     gxpl: '年度·',
     gxfs: '手工填报',
     gxsj: '次年省文件下发日（12月）',
@@ -255,11 +255,11 @@ export const middleTitleData = [
   },
   {
     name: '新增上云企业家数',
-    zb_hy:
+    zbyy:
       '1.定义：新增以互联网为基础进行信息化基础设施、管理、业务等方面应用，并通过互联网与云计算手段连接社会化资源、共享服务及能力的企业数。2.反映我市企业数字化转型情况。',
-    cjfz: '300家',
+    cjyz: '300家',
     cjcs: '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。',
-    yzfz: '400家',
+    yzyy: '400家',
     gxpl: '年度',
     gxfs: '手工填报',
     gxsj: '次年三月',

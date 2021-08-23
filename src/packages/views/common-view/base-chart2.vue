@@ -32,15 +32,6 @@ export default {
   data() {
     return {};
   },
-  watch: {
-    'option.series': {
-      handler(newVal) {
-        if (newVal) {
-          this.initCharts();
-        }
-      }
-    }
-  },
   created() {
     this.$nextTick(() => {
       this.initCharts();

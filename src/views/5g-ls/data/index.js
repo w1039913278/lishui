@@ -16,7 +16,8 @@ export const baseStationSituationData = {
   value: [
     { left_top_label: ' 全市5年规划基站（个）', value: '12277' },
     { left_top_label: '2020年规划基站（个）', value: '2826' },
-    { left_top_label: '2020年已建成基站（个）', value: '2826' }
+    { left_top_label: '2020年已建成基站（个）', value: '2826' },
+    { left_top_label: ' ', value: ' ' }
   ]
 };
 

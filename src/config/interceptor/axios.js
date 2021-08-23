@@ -103,8 +103,8 @@ export function requestSuccessFunc(requestConfig = {}) {
  * @returns {{}}
  */
 export function responseSuccessFunc(response) {
-  _get(response, 'config.console_response_enable', false);
-  // console.info('responseInterceptorFunc：', response);
+  _get(response, 'config.console_response_enable', false) &&
+    console.info('responseInterceptorFunc：', response);
   if (_isFunction(_get(window, 'apiRequestEndHandler', null))) {
     // 通知函数定义处-请求结束
     _spread(_get(window, 'apiRequestEndHandler'))([response]);

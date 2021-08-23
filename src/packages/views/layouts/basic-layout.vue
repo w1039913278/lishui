@@ -2,57 +2,75 @@
   <div :class="[$style.box]">
     <div class="ls-map-shade_box"></div>
     <div class="ls-map-shade-right_box"></div>
-    <div :class="$style.mapContainer" id="helperMapContainer"></div>
-    <div :class="$style.mapDataFilterWrapper" v-show="!isDetail">
-      <base-filter :list="filterList" @change="dataChange"></base-filter>
+    <div :class="$style.mapContainer"
+         id="helperMapContainer"></div>
+    <div :class="$style.mapDataFilterWrapper"
+         v-show="!isDetail">
+      <base-filter :list="filterList"
+                   @change="dataChange"></base-filter>
     </div>
     <div :class="$style.north">
       <div :class="$style.title">
         <!--这里的标题应该用title-->
         <span @click="onTitleClick">{{ title }}</span>
       </div>
-      <div :class="$style.back" @click="onBack">
-        <img src="/static/images/top/back.png" alt title="返回" />
+      <div :class="$style.back"
+           @click="onBack">
+        <img src="/static/images/top/back.png"
+             alt=""
+             title="返回" />
         <span>返回</span>
       </div>
     </div>
-    <div :class="$style.west" ref="west-ref">
+    <div :class="$style.west"
+         ref="west-ref">
       <slot name="west"></slot>
     </div>
-    <div :class="$style.center" ref="center-ref">
-      <slot name="center"></slot>
-    </div>
-    <div :class="$style.east" ref="east-ref">
+    <div :class="$style.east"
+         ref="east-ref">
       <slot name="east"></slot>
     </div>
     <template v-if="!isDetail">
-      <div :class="$style.middle" v-if="renderMiddle">
+      <div :class="$style.middle"
+           v-if="renderMiddle">
         <div>
           <span>{{ middleTitle }}</span>
         </div>
         <div>
-          <div v-for="(item, index) of middleList" :key="index" @click="middleTitleClick(item, index)" :style="{
+          <div v-for="(item, index) of middleList"
+               :key="index"
+               @click="middleTitleClick(item, index)"
+               :style="{
               cursor: pointer(item, index)
             }">
             <span>{{ item.text }}</span>
             <span>
               {{ item.value }}
-              <img :src="item.img" alt style="width: 20px;height: 20px;" v-if="item.img" />
+              <img :src="item.img"
+                   alt=""
+                   style="width: 20px;height: 20px;"
+                   v-if="item.img">
             </span>
           </div>
         </div>
       </div>
     </template>
-    <div :class="$style.detailBox" v-if="isDetail">
-      <div :class="$style.title" v-if="showDetailTitle.length > 0">
-        <img src="/static/images/arrow-right.png" alt />
+    <div :class="$style.detailBox"
+         v-if="isDetail">
+      <div :class="$style.title"
+           v-if="showDetailTitle.length > 0">
+        <img src="/static/images/arrow-right.png"
+             alt="" />
         {{ showDetailTitle }}
-        <img src="/static/images/arrow-left.png" alt />
+        <img src="/static/images/arrow-left.png"
+             alt="" />
       </div>
       <div :class="$style.tabs">
         <el-tabs v-model="activeName">
           <template v-for="(item, index) in tabs">
-            <el-tab-pane :label="item" :name="index.toString()" :key="index"></el-tab-pane>
+            <el-tab-pane :label="item"
+                         :name="index.toString()"
+                         :key="index"></el-tab-pane>
           </template>
         </el-tabs>
       </div>
@@ -65,11 +83,8 @@
                 <span>{{ item[0].value }}</span>
               </div>
               <div :class="$style.left">
-                <span>
-                  {{ item[1].text
-                  }}
-                  <span v-if="item[1].text.length > 0">：</span>
-                </span>
+                <span>{{ item[1].text
+                  }}<span v-if="item[1].text.length > 0">：</span></span>
                 <span>{{ item[1].value }}</span>
               </div>
             </div>
@@ -78,7 +93,8 @@
             <div :key="index">
               <div :class="$style.last">
                 <span>{{ item[0].text }}</span>
-                <div v-for="(sub, index) of item[0].value" :key="index">
+                <div v-for="(sub, index) of item[0].value"
+                     :key="index">
                   <p v-if="sub.length > 0">
                     <span v-if="item[0].value.length > 1">{{ index }}、</span>
                     <span v-html="sub"></span>
@@ -231,7 +247,7 @@ export default {
     // 指标数据
     detailData: {
       type: Array,
-      default: () => {}
+      default: () => { }
     },
     // 是否显示名称
     pointShowName: {
@@ -250,7 +266,6 @@ export default {
         if (!_isNil(this.$refs['west-ref'])) {
           this.$refs['west-ref'].style.zIndex = -10;
           this.$refs['east-ref'].style.zIndex = -10;
-          this.$refs['center-ref'].style.zIndex = -10;
           this.isShow = true;
         }
       } else {
@@ -258,14 +273,8 @@ export default {
         if (!_isNil(this.$refs['west-ref'])) {
           this.$refs['west-ref'].style.zIndex = 1111;
           this.$refs['east-ref'].style.zIndex = 1111;
-          this.$refs['center-ref'].style.zIndex = 1111;
           this.isShow = false;
         }
-      }
-    },
-    points(val, oldVal) {
-      if (val) {
-        this.dataChange(this.filterList[0]);
       }
     }
   },
@@ -453,7 +462,7 @@ export default {
         districtExplorer.loadMultiAreaNodes(
           adcodes,
           function (error, areaNodes) {
-            // console.log(error);
+            console.log(error);
             districtExplorer.setAreaNodesForLocating(areaNodes);
             // 清除已有的绘制内容
             // districtExplorer.clearFeaturePolygons();
@@ -690,16 +699,6 @@ export default {
     z-index: 1111;
     padding-bottom: 10px;
   }
-  .center {
-    width: 496px;
-    box-sizing: border-box;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-248px);
-    top: 90px;
-    z-index: 1111;
-    padding-bottom: 10px;
-  }
   .east {
     width: 496px;
     box-sizing: border-box;
@@ -817,9 +816,7 @@ export default {
         .left {
           width: 700px;
           display: inline-block;
-          // padding-right: 542px;
           box-sizing: border-box;
-          // outline: 1px solid red;
         }
         .last {
           > span:first-child {

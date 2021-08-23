@@ -1,15 +1,27 @@
 <template>
   <div :class="$style.main">
     <div :class="$style.head" v-if="isRenderTitle">
-      <div @click="onTitleClick(title, $event)" :style="{
+      <div
+        @click="onTitleClick(title, $event)"
+        :style="{
           cursor: 'titleClick' in this.$listeners ? 'pointer' : undefined
-        }">{{ title }}</div>
+        }"
+      >
+        {{ title }}
+      </div>
       <div v-if="endTag != ''" :class="$style.endTag">{{ endTag }}</div>
     </div>
-    <div :class="isBoxShadow ? $style.chart : undefined" :style="{ height: chartHeight }">
+    <div
+      :class="isBoxShadow ? $style.chart : undefined"
+      :style="{ height: chartHeight }"
+    >
       <slot v-if="!showCharts" name="chart"></slot>
       <slot v-else-if="showChartsTwo" name="chart-two"></slot>
-      <div v-else :id="id" style="height: 100%; width: 100%;overflow: hidden"></div>
+      <div
+        v-else
+        :id="id"
+        style="height: 100%; width: 100%;overflow: hidden"
+      ></div>
     </div>
   </div>
 </template>
@@ -71,22 +83,6 @@ export default {
   data() {
     return {};
   },
-  watch: {
-    'option.xAxis.data': {
-      handler(newVal) {
-        if (newVal && this.showCharts) {
-          this.initCharts();
-        }
-      }
-    },
-    'option.series': {
-      handler(newVal) {
-        if (newVal && this.showCharts) {
-          this.initCharts();
-        }
-      }
-    }
-  },
   created() {
     this.$nextTick(() => {
       if (this.showCharts) {
@@ -119,13 +115,14 @@ export default {
         this.charts = echarts.init(document.getElementById(this.id));
         this.charts.setOption(this.option);
         const that = this;
-        that.charts.on('legendselectchanged', (event) => {
+        that.charts.on('legendselectchanged', event => {
           if (this.isClickLegend) {
             that.charts.setOption({
               legend: { selected: { [event.name]: true } }
             });
           }
           this.$emit('legendselectchanged', event);
+          // this.$router.push({ path: '/industry-economic-run' });
         });
         window.addEventListener('resize', () => {
           that.charts.resize();

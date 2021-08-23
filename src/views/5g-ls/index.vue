@@ -1,93 +1,73 @@
 <template>
   <div :class="$style.main">
-    <basic-layout
-      :filterList="filterList"
-      :areaList="areaList"
-      :points="points"
-      :middleList="middleList"
-      title="5G丽水"
-      @titleClick="on5GTitleClick"
-      ref="5g-ls-ref"
-      :changeMapOpacity="false"
-    >
+    <basic-layout :filterList="filterList"
+                  :areaList="areaList"
+                  :points="points"
+                  :middleList="middleList"
+                  title="5G丽水"
+                  @titleClick="on5GTitleClick"
+                  ref="5g-ls-ref"
+                  :changeMapOpacity="false">
       <template v-slot:west>
         <div :class="$style.box">
           <div>
-            <base-chart
-              title="5G基站建设情况"
-              :showChartsTwo="true"
-              @titleClick="on5GBaseClick"
-            >
+            <base-chart title="5G基站建设情况"
+                        :showChartsTwo="true"
+                        @titleClick="on5GBaseClick">
               <template slot="chart-two">
-                <div
-                  style="height: 100%; width: 100%; padding: 0px 10px; display: flex;justify-content: space-between;width:100%;"
-                  class="border-box"
-                >
-                  <div class="item" style="width:45%">
-                    <base-chart2
-                      :option="leftTopOption"
-                      id="leftTop-one"
-                    ></base-chart2>
+                <div style="height: 100%; width: 100%; padding: 0px 10px; display: flex;justify-content: space-between;width:100%;"
+                     class="border-box">
+                  <div class="item"
+                       style="width:45%">
+                    <base-chart2 :option="leftTopOption"
+                                 id="leftTop-one"></base-chart2>
                   </div>
-                  <div class="item" style="width:50%">
-                    <base-chart2
-                      :option="rightTopOption"
-                      id="leftTop-two"
-                    ></base-chart2>
+                  <div class="item"
+                       style="width:50%">
+                    <base-chart2 :option="rightTopOption"
+                                 id="leftTop-two"></base-chart2>
                   </div>
                 </div>
               </template>
             </base-chart>
           </div>
           <div>
-            <base-chart
-              title="2020-2025年规划基站数排名"
-              endTag=""
-              :showCharts="false"
-              @titleClick="onPlanningClick"
-            >
+            <base-chart title="2020-2025年规划基站数排名"
+                        endTag=""
+                        :showCharts="false"
+                        @titleClick="onPlanningClick">
               <template slot="chart">
-                <div
-                  style="height: 100%; width: 100%; padding: 0px 10px"
-                  class="border-box "
-                >
+                <div style="height: 100%; width: 100%; padding: 0px 10px"
+                     class="border-box ">
                   <div class="full-xy overflow">
-                    <base-progress
-                      :list="dataList"
-                      :header="{
+                    <base-progress :list="dataList"
+                                   :header="{
                         rank: '序号',
                         name: '区域',
                         value: '规划基站数',
                         unit: '个'
-                      }"
-                    ></base-progress>
+                      }"></base-progress>
                   </div>
                 </div>
               </template>
             </base-chart>
           </div>
           <div>
-            <base-chart
-              title="2020年已建成基站数排名"
-              endTag=""
-              :showCharts="false"
-              @titleClick="onCompletedClick"
-            >
+            <base-chart title="2020年已建成基站数排名"
+                        endTag=""
+                        :showCharts="false"
+                        @titleClick="onCompletedClick">
               <template slot="chart">
-                <div
-                  style="height: 100%; width: 100%; padding: 0px 10px"
-                  class="border-box"
-                >
+                <div style="height: 100%; width: 100%; padding: 0px 10px"
+                     class="border-box">
                   <div class="full-xy overflow">
-                    <base-progress
-                      :list="completeDataList"
-                      :header="{
+                    <base-progress :list="completeDataList"
+                                   :header="{
                         rank: '序号',
                         name: '区域',
                         value: '已完成基站数',
                         unit: '个'
-                      }"
-                    ></base-progress>
+                      }"></base-progress>
                   </div>
                 </div>
               </template>
@@ -97,29 +77,28 @@
       </template>
       <template v-slot:east>
         <div :class="$style.box">
-          <base-chart
-            title="各区县基站建设情况"
-            :showCharts="false"
-            chartHeight="92%"
-            @titleClick="onCityClick"
-          >
+          <base-chart title="各区县基站建设情况"
+                      :showCharts="false"
+                      chartHeight="92%"
+                      @titleClick="onCityClick">
             <template slot="chart">
-              <div
-                id="rightBot"
-                style="height: 35%; width: 100%; overflow: hidden"
-              ></div>
+              <div id="rightBot"
+                   style="height: 35%; width: 100%; overflow: hidden"></div>
               <div :class="$style.table">
                 <div :class="$style.tableHead">
                   <div :class="$style.tableHeadItem">属地</div>
-                  <div :class="$style.tableHeadItem" @click="onPlanningClick">
+                  <div :class="$style.tableHeadItem"
+                       @click="onPlanningClick">
                     <div>2020-2025年</div>
                     <div>规划基站数</div>
                   </div>
-                  <div :class="$style.tableHeadItem" @click="onPlanningClick">
+                  <div :class="$style.tableHeadItem"
+                       @click="onPlanningClick">
                     <div>2020年</div>
                     <div>规划基站数</div>
                   </div>
-                  <div :class="$style.tableHeadItem" @click="onCompletedClick">
+                  <div :class="$style.tableHeadItem"
+                       @click="onCompletedClick">
                     <div>2020年</div>
                     <div>已建成基站数</div>
                   </div>
@@ -129,25 +108,23 @@
                   </div>
                 </div>
                 <div :class="$style.tableContent">
-                  <div
-                    :class="$style.tableContentRow"
-                    v-for="(item, index) in tableList"
-                    :key="index"
-                  >
+                  <div :class="$style.tableContentRow"
+                       v-for="(item, index) in tableList"
+                       :key="index">
                     <div :class="$style.tableContentRowItem">
                       {{ item.area }}
                     </div>
                     <div :class="$style.tableContentRowItem">
-                      {{ item.fiveYearCompleteNumber }}
+                      {{ item['5year_plan_stat'] }}
                     </div>
                     <div :class="$style.tableContentRowItem">
-                      {{ item.yearPlanNumber }}
+                      {{ item['2020_plan_stat'] }}
                     </div>
                     <div :class="$style.tableContentRowItem">
-                      {{ item.yearCompleteNumber }}
+                      {{ item.finish_stat }}
                     </div>
                     <div :class="$style.tableContentRowItem">
-                      {{ item.yearCompleteRate }}
+                      {{ item['finish_rate'] }}
                     </div>
                   </div>
                 </div>
@@ -162,334 +139,139 @@
 
 <script>
 import {
-  // countyBaseStationNumData,
+  countyBaseStationNumData,
   mapData,
   builtData,
   planData,
-  areaList
+  areaList,
+  baseStationSituationData,
+  alreadyBaseStationNumData,
+  planningBaseStationNumData,
+  tableList
 } from './data/index.js';
 import echarts from 'echarts';
 import { baseGaugeOption, baseBarLine2Option } from '@plugins/chart';
+// eslint-disable-next-line no-unused-vars
+import {
+  titleData,
+  completedData,
+  planningData,
+  base5GData,
+  cityData
+} from './data/quota.js';
 
 export default {
   data() {
-    // this.countyBaseStationNumData = countyBaseStationNumData.value;
+    this.countyBaseStationNumData = countyBaseStationNumData.value;
+    this.baseStationSituationData = baseStationSituationData;
     return {
-      titleData: {},
       dataList: [],
       middleList: [],
       completeDataList: [],
       filterList: mapData,
       areaList,
-      points: [],
+      points: [...builtData, ...planData],
       rightBotOption: null,
       barData: [],
-      NewbuiltData: [],
-      NewplanData: [],
-      leftTopOption: baseGaugeOption(
-        {
-          title: '2020年完成率',
-          topTit: '2020年规划基站2826个',
-          colors: '#42E1A6',
-          rate: '0',
-          rateData: 0 / 1.5,
-          dataArr: [
-            {
-              value: 0
-            }
-          ]
-        },
-        1
-      ),
-      tableList: [],
-      baseStationSituationData: {},
-      rightTopOption: baseGaugeOption({
-        title: '5年完成率',
-        topTit: '5年规划基站12277个',
-        colors: '#F6BD16',
-        rate: '0',
-        rateData: 0,
-        dataArr: [
-          {
-            value: 0
-          }
-        ]
-      }),
-      base5GData: {}, // 5G基站建设情况
-      planningData: {}, // 2020-2025基站数排名
-      completedData: {},
-      loading: null
+      leftTopOption: null,
+      tableList
     };
   },
-  async created() {
-    this.loading = this.$loading({
-      lock: true,
-      target: '加载中'
-    });
-    await this.getMainData();
-    await this.getZtIndexCardData();
-    await this.getOneIndexCardData();
-    await this.getTwoChartData();
-    await this.getTwoCardIndexData();
-    await this.getThreeChartData();
-    await this.getThreeCardIndexData();
-    await this.getFourChartData();
-    await this.getFourCardIndexData();
+  created() {
+    this.getCompleteDataList();
+    this.getDataList();
+    const gaugeDataOne = {
+      title: '2020年完成率',
+      topTit: '2020年规划基站2826个',
+      colors: '#42E1A6',
+      rate: '100%',
+      rateData: 1 / 1.5,
+      dataArr: [
+        {
+          value: this.baseStationSituationData.value[2].value
+        }
+      ]
+    };
+    const gaugeDataTwo = {
+      title: '5年完成率',
+      topTit: '5年规划基站12277个',
+      colors: '#F6BD16',
+      rate: '23.02%',
+      rateData: 0.23,
+      dataArr: [
+        {
+          value: this.baseStationSituationData.value[1].value
+        }
+      ]
+    };
+    this.leftTopOption = baseGaugeOption(gaugeDataOne, 1);
+    this.rightTopOption = baseGaugeOption(gaugeDataTwo);
+    this.dataHandle();
   },
   mounted() {
-    // this.$nextTick(() => {
-    //   this.initCharts();
-    // });
+    this.$nextTick(() => {
+      this.initCharts();
+    });
   },
   methods: {
-    /**
-     * @desc 各区县基站建设情况-指标卡片数据
-     */
-    async getFourCardIndexData() {
-      this.$api['5g-ls/index/getFourCardIndexData']({}).then(res => {
-        this.cityData = { ...res.data };
-        this.cityData.name = '5G通信基础设施建设已完成情况';
-        // this.cityData.yzfz = '/';
-        // this.cityData.cjfz = '/';
-        this.cityData.cjcs = '/';
-        this.loading.close();
-      });
-    },
-    /**
-     * @desc 2020年已建成基站数排名-指标卡片数据
-     */
-    async getFourChartData() {
-      this.$api['5g-ls/index/getFourChartData']({}).then(res => {
-        const data = res.data;
-        this.tableList = data;
-        this.barData = {
-          xAxis: data.map(v => {
-            return v.area;
-          }),
-          value: [
-            {
-              name: '2020年已建成基站',
-              data: data.map(v => {
-                return Number(v.yearCompleteNumber);
-              })
-            },
-            {
-              name: '2020年规划基站',
-              data: data.map(v => {
-                return Number(v.yearPlanNumber);
-              })
-            },
-            {
-              name: '2020年完成率',
-              data: data.map(v => {
-                return Number(v.yearCompleteRate);
-              })
-            }
-          ]
+    // 进度条数据获取
+    getCompleteDataList() {
+      const dataList = alreadyBaseStationNumData.value;
+      const total = alreadyBaseStationNumData.total;
+      this.completeDataList = dataList.map(item => {
+        return {
+          value: item.finish_stat,
+          name: item.area,
+          total: total
         };
-        this.$nextTick(() => {
-          this.initCharts();
-        });
       });
     },
-    /**
-     * @desc 2020年已建成基站数排名-指标卡片数据
-     */
-    async getThreeCardIndexData() {
-      this.$api['5g-ls/index/getThreeCardIndexData']({}).then(res => {
-        this.completedData = { ...res.data };
-        this.completedData.name = '5G通信基础设施建设已完成情况';
-        // this.completedData.yzfz = '/';
-        // this.completedData.cjfz = '/';
-        this.completedData.cjcs = '/';
-      });
-    },
-    /**
-     * @desc 2020年已建成基站数排名-图表数据
-     */
-    async getThreeChartData() {
-      this.$api['5g-ls/index/getThreeChartData']({}).then(res => {
-        this.completeDataList = res.data.map(item => {
-          return {
-            value: item.value,
-            name: item.area
-          };
-        });
-      });
-    },
-    /**
-     * @desc 2020-2025年规划基站数排名-指标卡片数据
-     */
-    async getTwoCardIndexData() {
-      this.$api['5g-ls/index/getTwoCardIndexData']({}).then(res => {
-        this.planningData = { ...res.data };
-        this.planningData.name = '5G通信基础设施建设规划完成情况';
-        // this.planningData.yzfz = '/';
-        // this.planningData.cjfz = '/';
-        this.planningData.cjcs = '/';
-      });
-    },
-    /**
-     * @desc 2020-2025年规划基站数排名-图表数据
-     */
-    async getTwoChartData() {
-      this.$api['5g-ls/index/getTwoChartData']({}).then(res => {
-        this.dataList = res.data.map(item => {
-          return {
-            value: item.value,
-            name: item.area
-          };
-        });
-      });
-    },
-    /**
-     * @desc 5G基站建设情况-指标卡片数据
-     */
-    async getOneIndexCardData() {
-      this.$api['5g-ls/index/getOneIndexCardData']({}).then(res => {
-        this.base5GData = { ...res.data };
-        this.base5GData.name = '5G通信基础设施建设已完成情况';
-        this.base5GData.cjcs =
-          '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。';
-        this.getOneChartData();
-      });
-    },
-    /**
-     * @desc 专5G基站建设情况-图表数据
-     */
-    async getOneChartData() {
-      this.$api['5g-ls/index/getOneChartData']({}).then(res => {
-        const data = res.data;
-        const max = Number(this.base5GData.yzfz.split(',')[1]);
-        const min = Number(this.base5GData.cjfz.split(',')[1]);
-        const gaugeDataOne = {
-          title: '2020年完成率',
-          topTit: `2020年规划基站${data.yearPlanNumber}个`,
-          colors: '#42E1A6',
-          rate: data.yearCompleteRate + '%',
-          rateData: Number(data.yearCompleteRate) / 150,
-          dataArr: [
-            {
-              value: data.yearPlanNumber
-            }
-          ]
+    // 进度条数据获取
+    getDataList() {
+      const dataList = planningBaseStationNumData.value;
+      const total = planningBaseStationNumData.total;
+      this.dataList = dataList.map(item => {
+        return {
+          value: item.plan_stat,
+          name: item.area,
+          total: total
         };
-        const gaugeDataTwo = {
-          title: '5年完成率',
-          topTit: `5年规划基站${data.fiveYearPlanNumber}个`,
-          colors: '#F6BD16',
-          rate: data.fiveYearCompleteRate + '%',
-          rateData: Number(data.fiveYearCompleteRate) / 100,
-          dataArr: [
-            {
-              value: data.fiveYearPlanNumber
-            }
-          ]
-        };
-        this.leftTopOption = baseGaugeOption(gaugeDataOne, 1, min, max);
-        this.rightTopOption = baseGaugeOption(gaugeDataTwo);
-      });
-    },
-    /**
-     * @desc 专题指标卡片数据
-     */
-    async getZtIndexCardData() {
-      this.$api['5g-ls/index/getZtIndexCardData']({}).then(res => {
-        this.titleData = { ...res.data };
-        this.titleData.name = '5G丽水';
-      });
-    },
-    /**
-     * @desc 数据指标及地图数据
-     */
-    async getMainData() {
-      this.$api['5g-ls/index/getMainData']({}).then(res => {
-        const data = res.data;
-        this.baseStationSituationData = {
-          name: '基站建设情况',
-          value: [
-            {
-              left_top_label: ' 全市5年规划基站（个）',
-              value: data.fiveYearPlanNumber
-            },
-            {
-              left_top_label: '2020年规划基站（个）',
-              value: data.yearPlanNumber
-            },
-            {
-              left_top_label: '2020年已建成基站（个）',
-              value: data.yearCompleteNumber
-            }
-          ]
-        };
-        this.middleList = _map(this.baseStationSituationData.value, o => ({
-          text: o.left_top_label,
-          value: o.value
-        }));
-        this.addmap(
-          data.completeInfo,
-          builtData,
-          this.NewbuiltData,
-          'The_base_station_has_been_built'
-        );
-        this.addmap(
-          data.planInfo,
-          planData,
-          this.NewplanData,
-          'Planning_Base_Station'
-        );
-        this.points = [...this.NewbuiltData, ...this.NewplanData];
-      });
-    },
-    /**
-     * @desc 地图数据添加
-     */
-    addmap(list1, list2, newlist, text) {
-      list1.forEach(ele => {
-        list2.forEach(item => {
-          if (ele.area === item.name) {
-            const ob = {
-              name: item.name,
-              value: ele.value,
-              lng: item.lng,
-              lat: item.lat,
-              type: text
-            };
-            newlist.push(ob);
-          }
-        });
       });
     },
     /**
      * @desc 数据处理
      */
-    // dataHandle() {
-    //   this.barData = {
-    //     xAxis: countyBaseStationNumData.value.map(v => {
-    //       return v.area;
-    //     }),
-    //     value: [
-    //       {
-    //         name: '2020年已建成基站',
-    //         data: countyBaseStationNumData.value.map(v => {
-    //           return v.finish_stat;
-    //         })
-    //       },
-    //       {
-    //         name: '2020年规划基站',
-    //         data: countyBaseStationNumData.value.map(v => {
-    //           return v['2020_plan_stat'];
-    //         })
-    //       },
-    //       {
-    //         name: '2020年完成率',
-    //         data: countyBaseStationNumData.value.map(v => {
-    //           return Number(v.finish_rate);
-    //         })
-    //       }
-    //     ]
-    //   };
-    // },
+    dataHandle() {
+      this.middleList = _map(baseStationSituationData.value, o => ({
+        text: o.left_top_label,
+        value: o.value
+      }));
+      this.barData = {
+        xAxis: countyBaseStationNumData.value.map(v => {
+          return v.area;
+        }),
+        value: [
+          {
+            name: '2020年已建成基站',
+            data: countyBaseStationNumData.value.map(v => {
+              return v.finish_stat;
+            })
+          },
+          {
+            name: '2020年规划基站',
+            data: countyBaseStationNumData.value.map(v => {
+              return v['2020_plan_stat'];
+            })
+          },
+          {
+            name: '2020年完成率',
+            data: countyBaseStationNumData.value.map(v => {
+              return Number(v.finish_rate);
+            })
+          }
+        ]
+      };
+    },
     initCharts() {
       this.charts = echarts.init(document.getElementById('rightBot'));
       this.charts.setOption(
@@ -518,41 +300,31 @@ export default {
      * @desc 标题点击事件
      */
     on5GTitleClick(event) {
-      this.$refs['5g-ls-ref'].openDetailHandle(this.titleData, false, [
-        'zt_hy',
-        'bz'
-      ]);
+      this.$refs['5g-ls-ref'].openDetailHandle(titleData, false, ['ztyy', 'bz']);
     },
     /**
      * @desc 5G基站建设情况-点击事件
      */
     on5GBaseClick(event) {
-      this.$refs['5g-ls-ref'].openDetailHandle(this.base5GData, true, [
-        'zb_hy',
-        'cjcs'
-      ]);
+      this.$refs['5g-ls-ref'].openDetailHandle(base5GData, true, ['zbyy', 'cjcs']);
     },
     /**
      * @desc 已完成基站数排名-点击事件
      */
     onCompletedClick(event) {
-      this.$refs['5g-ls-ref'].openDetailHandle(this.completedData, true, [
-        'zb_hy'
-      ]);
+      this.$refs['5g-ls-ref'].openDetailHandle(completedData, true, ['zbyy']);
     },
     /**
      * @desc 规划基站数排名-点击事件
      */
     onPlanningClick(event) {
-      this.$refs['5g-ls-ref'].openDetailHandle(this.planningData, true, [
-        'zb_hy'
-      ]);
+      this.$refs['5g-ls-ref'].openDetailHandle(planningData, true, ['zbyy']);
     },
     /**
      * @desc 各县市基站建设情况-点击事件
      */
     onCityClick(event) {
-      this.$refs['5g-ls-ref'].openDetailHandle(this.cityData, true, ['zb_hy']);
+      this.$refs['5g-ls-ref'].openDetailHandle(cityData, true, ['zbyy']);
     }
   }
 };

@@ -13,7 +13,7 @@
       <p class="progress-box-header-name">区域</p>
       <p class="progress-box-header-value" @click="clickTitle(header.value)">
         {{ header.value }} {{ header.unit ? '(' + header.unit + ')' : '' }}
-        <img :src="header.img" alt="" style="width:15px;height:15px;vertical-align: top;" v-if="header.img">
+        <img :src="header.img" alt="" style="width:15px;height:15px" v-if="header.img">
       </p>
     </div>
     <div class="overflow" v-if="isScroll">

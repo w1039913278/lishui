@@ -4,28 +4,28 @@
 // 点击标题的数据
 export const titleData = {
   name: '企业培育和帮扶',
-  zt_hy: '1.专题定义：规上企业、小微园区、隐形冠军等相关企业提升及减负情况',
+  ztyy: '1.专题定义：规上企业、小微园区、隐形冠军等相关企业提升及减负情况',
   qtdw: '市经信局',
-  zt_ywfzr: '吴毅 2095093',
+  qtdwfzr: '吴毅 2095093',
   // sjhm1: '2095093',
-  zt_fgld: '舒杨胤 2095005',
+  qtdwfgld: '舒杨胤 2095005',
   // sjhm2: '2095005',
   xtdw: '市统计局',
-  zt_sl: '9',
+  zbxsl: '9',
   bz: '按照“应设尽设”原则，结合本页面数据统筹情况，本页面无需要设置的触警阈值和优质阈值。'
 };
 
 // 小升规数量
 export const newUpEnterpriseData = {
   name: '新升规企业实际数量',
-  zb_hy: '1.反映全市新增规模以上企业数量',
+  zbyy: '1.反映全市新增规模以上企业数量',
   cjyz: '/',
   cjcs: '/',
   yzyy: '/',
   gxpl: '年度',
-  sjyfs: '数据接口',
-  t: '每年年底及第二年一月',
-  zb_dw: '市统计局',
+  gxfs: '数据接口',
+  gxsj: '每年年底及第二年一月',
+  lybm: '市统计局',
   ywfzr: '吴毅 2095091',
   // lxfs1: '2095091',
   fgld: '舒杨胤 2095003'
@@ -34,14 +34,14 @@ export const newUpEnterpriseData = {
 // 目标任务数
 export const newUpEnterpriseTaskData = {
   name: '新升规企业任务数量',
-  zb_hy: '1.反映省级下达新增规上企业任务',
+  zbyy: '1.反映省级下达新增规上企业任务',
   cjyz: '/',
   cjcs: '/',
   yzyy: '/',
   gxpl: '年度',
-  sjyfs: '手工填报',
-  t: '每年年初',
-  zb_dw: '市经信局',
+  gxfs: '手工填报',
+  gxsj: '每年年初',
+  lybm: '市经信局',
   ywfzr: '吴毅 2095091',
   // lxfs1: '2095091',
   fgld: '舒杨胤 2095003'
@@ -51,14 +51,14 @@ export const newUpEnterpriseTaskData = {
 // 隐形冠军企业数量
 export const goldEnterpriseData = {
   name: '隐形冠军企业数量',
-  zb_hy: '1.反映经省级认定的隐形冠军企业存量',
+  zbyy: '1.反映经省级认定的隐形冠军企业存量',
   cjyz: '/',
   cjcs: '/',
   yzyy: '/',
   gxpl: '年度',
-  sjyfs: '手工填报',
-  t: '12月',
-  zb_dw: '市经信局',
+  gxfs: '手工填报',
+  gxsj: '12月',
+  lybm: '市经信局',
   ywfzr: '吴毅 2095091',
   // lxfs1: '2095091',
   fgld: '舒杨胤 2095003'
@@ -68,14 +68,14 @@ export const goldEnterpriseData = {
 // 隐形冠军培育企业数量
 export const goldEnterpriseCultivateData = {
   name: '隐形冠军培育企业数量',
-  zb_hy: '1.反映经省级认定的隐形冠军培育企业存量',
+  zbyy: '1.反映经省级认定的隐形冠军培育企业存量',
   cjyz: '/',
   cjcs: '/',
   yzyy: '/',
   gxpl: '年度',
-  sjyfs: '手工填报',
-  t: '12月',
-  zb_dw: '市经信局',
+  gxfs: '手工填报',
+  gxsj: '12月',
+  lybm: '市经信局',
   ywfzr: '吴毅 2095091',
   // lxfs1: '2095091',
   fgld: '舒杨胤 2095003'
@@ -85,14 +85,14 @@ export const goldEnterpriseCultivateData = {
 // A档小微企业园数量
 export const aGardenData = {
   name: 'A档小微企业园数量',
-  zb_hy: '1.反映经绩效评价确定为Ａ档小微企业园数量',
+  zbyy: '1.反映经绩效评价确定为Ａ档小微企业园数量',
   cjyz: '/',
   cjcs: '/',
   yzyy: '/',
   gxpl: '年度',
-  sjyfs: '手工填报',
-  t: '每年年中',
-  zb_dw: '市经信局',
+  gxfs: '手工填报',
+  gxsj: '每年年中',
+  lybm: '市经信局',
   ywfzr: '吴毅 2095091',
   // lxfs1: '2095091',
   fgld: '舒杨胤 2095003'
@@ -102,14 +102,14 @@ export const aGardenData = {
 // B档小微企业园数量
 export const bGardenData = {
   name: 'B档小微企业园数量',
-  zb_hy: '1.反映经绩效评价确定为Ｂ档小微企业园数量',
+  zbyy: '1.反映经绩效评价确定为Ｂ档小微企业园数量',
   cjyz: '/',
   cjcs: '/',
   yzyy: '/',
   gxpl: '年度',
-  sjyfs: '手工填报',
-  t: '每年年中',
-  zb_dw: '市经信局',
+  gxfs: '手工填报',
+  gxsj: '每年年中',
+  lybm: '市经信局',
   ywfzr: '吴毅 2095091',
   // lxfs1: '2095091',
   fgld: '舒杨胤 2095003'
@@ -119,14 +119,14 @@ export const bGardenData = {
 // C档小微企业园数量
 export const cGardenData = {
   name: 'C档小微企业园数量',
-  zb_hy: '1.反映经绩效评价确定为Ｃ档小微企业园数量',
+  zbyy: '1.反映经绩效评价确定为Ｃ档小微企业园数量',
   cjyz: '/',
   cjcs: '/',
   yzyy: '/',
   gxpl: '年度',
-  sjyfs: '手工填报',
-  t: '每年年中',
-  zb_dw: '市经信局',
+  gxfs: '手工填报',
+  gxsj: '每年年中',
+  lybm: '市经信局',
   ywfzr: '吴毅 2095091',
   // lxfs1: '2095091',
   fgld: '舒杨胤 2095003'
@@ -136,14 +136,14 @@ export const cGardenData = {
 // D档小微企业园数量
 export const dGardenData = {
   name: 'D档小微企业园数量',
-  zb_hy: '1.反映经绩效评价确定为Ｄ档小微企业园数量',
+  zbyy: '1.反映经绩效评价确定为Ｄ档小微企业园数量',
   cjyz: '/',
   cjcs: '/',
   yzyy: '/',
   gxpl: '年度',
-  sjyfs: '手工填报',
-  t: '每年年中',
-  zb_dw: '市经信局',
+  gxfs: '手工填报',
+  gxsj: '每年年中',
+  lybm: '市经信局',
   ywfzr: '吴毅 2095091',
   // lxfs1: '2095091',
   fgld: '舒杨胤 2095013'
@@ -153,14 +153,14 @@ export const dGardenData = {
 // 五减政策落实情况
 export const fivePolicyData = {
   name: '降本减负完成情况',
-  zb_hy: '1.反映减轻企业负担情况',
+  zbyy: '1.反映减轻企业负担情况',
   cjyz: '/',
   cjcs: '/',
   yzyy: '/',
   gxpl: '季度',
-  sjyfs: '手工填报',
-  t: '季度次月',
-  zb_dw: '市经信局',
+  gxfs: '手工填报',
+  gxsj: '季度次月',
+  lybm: '市经信局',
   ywfzr: '李建敏 2095059',
   // lxfs1: '2095059',
   fgld: '李建军 2095007'

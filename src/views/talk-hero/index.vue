@@ -25,7 +25,7 @@
                       chartHeight="calc(100% - 50px)"
                       id="taxRevenue"
                       :showCharts="false"
-                      @titleClick="onBenefitClick()">
+                      @titleClick="showAllIndex">
             <template slot="chart">
               <div :class="$style.cardBody">
                 <div :class="$style.indicatrix">
@@ -119,7 +119,7 @@ import basicLayout from '../../packages/views/layouts/basic-layout.vue';
 import { baseBarLineOption, basePieOption } from '@plugins/chart';
 import {
   middleData,
-  // upEnterpriseAverageBenefitData,
+  upEnterpriseAverageBenefitData,
   averageTaxRevenueData,
   AllPlayProduceRmbData,
   RDexpenditureProportion,
@@ -133,15 +133,15 @@ import {
   filterList,
   areaList,
   mjTaxMapData,
-  mjAddMapData
-  // rightTwo,
-  // rightThree
+  mjAddMapData,
+  rightTwo,
+  rightThree
 } from './data/index.js';
 
 import {
-  // titleData,
-  // mjTaxData,
-  // mjBenefit,
+  titleData,
+  mjTaxData,
+  mjBenefit,
   mjBenefitCounty,
   middleTitleData,
   industryCountyData
@@ -158,10 +158,8 @@ export default {
       optionData, // 亩均税收情况
       filterList,
       active: 0,
-      benefitList: null, // 规上企业亩均效益指标
+      benefitList: upEnterpriseAverageBenefitData, // 规上企业亩均效益指标
       middleList: [], // 中央大屏数据
-      mjTaxMapData: [],
-      mjAddMapData: [],
       averageTaxRevenueData, // 亩均税收情况
       AllPlayProduceRmbData,
       RDexpenditureProportion,
@@ -170,285 +168,21 @@ export default {
       averageAddRmbData,
       averageTaxRevenueRmbData,
       areaList,
-      points: [],
+      points: [...mjTaxMapData, ...mjAddMapData],
       marginLeft: 0, // 区县各指标排名的偏移
       header: {
         rank: '序号',
         name: '区域',
         value: '企业家数',
         unit: ''
-      },
-      rightTwo: [],
-      rightThree: [],
-      titleData: {},
-      mjTaxData: [],
-      mjBenefit: [],
-      rightTwoChartOption: {},
-      rightThreeChartOption: {}
+      }
     };
   },
-  async created() {
-    this.loading = this.$loading({
-      lock: true,
-      target: '加载中'
-    });
-    await this.getMainData();
-    // await this.getOneChartData();
-    await this.getTwoChartData();
-    await this.getThreeChartData();
-    await this.getFourChartData();
-    await this.getFiveChartData();
-    await this.getZtIndexCardData();
-    await this.getOneCardIndexData();
-    await this.getTwoCardIndexData();
-  },
-  mounted() {
+  created() {
     this.initData();
+    this.onIndicatrix(this.active);
   },
   methods: {
-    /**
-     * @desc 数据指标及地图数据
-     */
-    async getMainData() {
-      this.$api['talk-hero/index/getMainData']({}).then((res) => {
-        const data = res.data;
-        const list = [
-          { text: '规上企业数(家)', value: data.entNumber },
-          { text: '税收实际贡献(万元)', value: data.taxValue },
-          { text: '工业增加值(万元)', value: data.indusAddValue },
-          { text: '用地面积(亩)', value: data.landArea }
-        ];
-        this.middleList = _map(list, (o) => ({
-          text: o.text,
-          value: o.value
-        }));
-        this.addmap(
-          data.taxPerValueList,
-          mjTaxMapData,
-          this.mjTaxMapData,
-          'Average_tax_per_mu'
-        );
-        this.addmap(
-          data.taxPerAddValueList,
-          mjAddMapData,
-          this.mjAddMapData,
-          'Average_value_added_per_mu'
-        );
-        this.points = [...this.mjTaxMapData, ...this.mjAddMapData];
-      });
-    },
-    /**
-     * @desc 地图数据添加
-     */
-    addmap(list1, list2, newlist, text) {
-      list1.forEach((ele) => {
-        list2.forEach((item) => {
-          if (ele.area === item.name) {
-            const ob = {
-              name: item.name,
-              value: ele.value,
-              lng: item.lng,
-              lat: item.lat,
-              type: text
-            };
-            newlist.push(ob);
-          }
-        });
-      });
-    },
-    /**
-     * @desc 亩均税收情况-图表数据
-     */
-    async getOneChartData() {
-      // console.log(this.mjTaxData[1].yzfz.split(',')[1]);
-      // console.log(this.mjTaxData[1].cjfz.split(',')[1]);
-      this.$api['talk-hero/index/getOneChartData']({}).then((res) => {
-        const max = Number(this.mjTaxData[1].yzfz.split(',')[1]);
-        const min = Number(this.mjTaxData[1].cjfz.split(',')[1]);
-        const bar = {
-          name: '亩均税收',
-          key: 'mu_per_tax',
-          data: []
-        };
-        const line = {
-          name: '增速',
-          key: 'mu_per_tax_rate',
-          data: []
-        };
-        for (let i = 0, len = res.data.length; i < len; i++) {
-          const _Value = res.data[i];
-          bar.data.push({
-            value: _Value.taxValue,
-            name: _Value.year
-          });
-          line.data.push({
-            value: _Value.increase,
-            name: _Value.year
-          });
-        }
-        this.optionData = [bar, line];
-        this.option = baseBarLineOption(
-          this.optionData,
-          {
-            isDoubleY: true,
-            unit: ['亿元', '%']
-          },
-          3,
-          1,
-          max, min
-        );
-      });
-    },
-    /**
-     * @desc 区县各指标排名-图表数据
-    */
-    async getTwoChartData() {
-      this.$api['talk-hero/index/getTwoChartData']({}).then((res) => {
-        res.data.forEach(item => {
-          switch (item.indexName) {
-          case '亩均税收':
-            this.averageTaxRevenueRmbData.value = item.data;
-            break;
-          case '亩均增加值':
-            this.averageAddRmbData.value = item.data;
-            break;
-          case '单位能耗增加值':
-            this.unitPowerAddRmbData.value = item.data;
-            break;
-          case '单位排放增加值':
-            this.unitDischargeAddRmbData.value = item.data;
-            break;
-          case 'R&D经费支出占比':
-            this.RDexpenditureProportion.value = item.data;
-            break;
-          case '全员劳动生产率':
-            this.AllPlayProduceRmbData.value = item.data;
-            break;
-          }
-        });
-        this.onIndicatrix(this.active);
-      });
-    },
-    /**
-     * @desc 规上企业亩均效益指标-图表数据
-    */
-    async getThreeChartData() {
-      this.$api['talk-hero/index/getThreeChartData']({}).then((res) => {
-        const upEnterpriseAverageBenefitData = [
-          { label_name: '亩均税收(万元/亩)', label_value: res.data.taxPerValue },
-          { label_name: '亩均增加值(万元/亩)', label_value: res.data.perAddValue },
-          { label_name: '单位能耗增加值(万元/吨)', label_value: res.data.energyConsumeAddValue },
-          { label_name: '单位排放增加值(万元/吨)', label_value: res.data.emissionAddValue },
-          { label_name: 'R&D经费支出占比(%)', label_value: res.data.proportionOfExpenditure },
-          { label_name: '全员劳动生产率(万元/人·年)', label_value: res.data.overallLaborProductivity }
-        ];
-        this.benefitList = upEnterpriseAverageBenefitData;
-      });
-    },
-    /**
-     * @desc 规上工业企业综合指标占比-图表数据
-    */
-    async getFourChartData() {
-      this.$api['talk-hero/index/getFourChartData']({}).then((res) => {
-        this.rightTwo = res.data;
-        this.rightTwoChartOption = basePieOption(
-          this.rightTwo,
-          '规上工业企业综合指标占比',
-          '家',
-          ['50%', '75%'],
-          ['70%', '50%'],
-          ['15%', 'center']
-        );
-      });
-    },
-    /**
-     * @desc 区县规上工业企业占比-图表数据
-    */
-    async getFiveChartData() {
-      this.$api['talk-hero/index/getFiveChartData']({}).then((res) => {
-        this.rightThree = res.data;
-        this.rightThreeChartOption = basePieOption(
-          this.rightThree,
-          '区县规上工业企业情况',
-          '家',
-          ['50%', '70%'],
-          ['70%', '50%'],
-          ['15%', 'center']
-        );
-      });
-    },
-    /**
-     * @desc 标题指标卡片数据
-     */
-    async getZtIndexCardData() {
-      this.$api['talk-hero/index/getZtIndexCardData']({}).then((res) => {
-        const data = res.data;
-        this.titleData = { ...data };
-        this.titleData.name = '工业经济运行';
-      });
-    },
-    /**
-     * @desc 亩均税收情况-卡片数据
-     */
-    async getOneCardIndexData() {
-      let params = {};
-      let list;
-      for (let i = 0; i < 2; i++) {
-        params = { type: i + 1 };
-        this.$api['talk-hero/index/getOneCardIndexData']({
-          params
-        }).then((res) => {
-          list = res.data;
-          if (i === 0) {
-            list.name = '丽水亩均税收';
-            list.cjcs = '/';
-          } else {
-            list.name = '丽水亩均税收增速';
-            list.cjcs = '触警在该指标的右侧出现<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>图标。触发优质时在该指标的右侧出现<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>图标。（鼠标移入后在提示信息中展示）';
-          }
-          this.mjTaxData.push(list);
-          this.getOneChartData();
-        });
-      }
-    },
-    /**
-     * @desc 区县各指标排名或规上企业亩均效益指标-指标卡片数据
-     */
-    async getTwoCardIndexData() {
-      let params = {};
-      let list;
-      for (let i = 0; i < 6; i++) {
-        params = { type: i + 1 };
-        this.$api['talk-hero/index/getTwoCardIndexData']({
-          params
-        }).then((res) => {
-          list = res.data;
-          list.cjcs = '/';
-          switch (i) {
-          case 0:
-            list.name = '丽水亩均税收';
-            break;
-          case 1:
-            list.name = '丽水亩均增加值';
-            break;
-          case 2:
-            list.name = '丽水单位能耗增加值';
-            break;
-          case 3:
-            list.name = '丽水单位排放增加值';
-            break;
-          case 4:
-            list.name = '丽水研发经费支出占主营业务收入百分比';
-            break;
-          case 5:
-            list.name = '丽水全员劳动生产率';
-            break;
-          }
-          this.mjBenefit.push(list);
-          this.loading.close();
-        });
-      }
-    },
     initData() {
       // 中央大屏数据处理
       this.middleList = middleData.map((item) => {
@@ -464,7 +198,7 @@ export default {
       //   }
       //   return item;
       // });
-      // this.getIndicatrData();
+      this.getIndicatrData();
       this.optionData = this.optionData.map((item) => {
         item.data = this.averageTaxRevenueData.value.map((value) => {
           return {
@@ -486,7 +220,7 @@ export default {
       );
 
       this.rightTwoChartOption = basePieOption(
-        this.rightTwo,
+        rightTwo,
         '规上工业企业综合指标占比',
         '家',
         ['50%', '75%'],
@@ -494,7 +228,7 @@ export default {
         ['15%', 'center']
       );
       this.rightThreeChartOption = basePieOption(
-        this.rightThree,
+        rightThree,
         '区县规上工业企业情况',
         '家',
         ['50%', '70%'],
@@ -514,7 +248,7 @@ export default {
       const dataList = this[indicatrix.key].value;
       this.dataList = dataList.map((item) => {
         return {
-          value: item.value,
+          value: item[indicatrix.valueIndex],
           name: item.area
         };
       });
@@ -531,7 +265,7 @@ export default {
     //   this.$refs['talk-hero-ref'].openDetailHandle(
     //     mjBenefitCounty[index],
     //     true,
-    //     ['zb_hy']
+    //     ['zbyy']
     //   );
     // },
     onLeftMargin(type) {
@@ -563,8 +297,8 @@ export default {
      * @desc 标题点击事件
      */
     onTitleClick(event) {
-      this.$refs['talk-hero-ref'].openDetailHandle(this.titleData, false, [
-        'zt_hy',
+      this.$refs['talk-hero-ref'].openDetailHandle(titleData, false, [
+        'ztyy',
         'bz'
       ]);
     },
@@ -574,9 +308,9 @@ export default {
     onMjTax({ name }) {
       // const index = legendData.indexOf(name);
       this.$refs['talk-hero-ref'].openDetailHandle(
-        this.mjTaxData,
+        mjTaxData,
         true,
-        ['zb_hy', 'cjcs'],
+        ['zbyy', 'cjcs'],
         ['亩均税收', '亩均税收增速']
       );
     },
@@ -585,9 +319,9 @@ export default {
      */
     onBenefitClick() {
       this.$refs['talk-hero-ref'].openDetailHandle(
-        this.mjBenefit,
+        mjBenefit,
         true,
-        ['zb_hy'],
+        ['zbyy'],
         [
           '亩均税收',
           '亩均增加值',
@@ -606,7 +340,7 @@ export default {
         this.$refs['talk-hero-ref'].openDetailHandle(
           middleTitleData[index],
           true,
-          ['zb_hy']
+          ['zbyy']
         );
       }
     },
@@ -615,7 +349,7 @@ export default {
      */
     industryCountyClick() {
       this.$refs['talk-hero-ref'].openDetailHandle(industryCountyData, true, [
-        'zb_hy'
+        'zbyy'
       ]);
     },
     /**
@@ -629,7 +363,7 @@ export default {
       this.$refs['talk-hero-ref'].openDetailHandle(
         mjBenefitCounty,
         true,
-        ['zb_hy'],
+        ['zbyy'],
         tabs
       );
     }

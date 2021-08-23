@@ -8,7 +8,7 @@
  */
 
 // type是0不需要家图标是1需要加图标
-export const baseGaugeOption = (data = {}, type = 0, min, max) => {
+export const baseGaugeOption = (data = {}, type = 0) => {
   var centerArr = ['50%', '75%'];
   return {
     title: {
@@ -152,33 +152,12 @@ export const baseGaugeOption = (data = {}, type = 0, min, max) => {
           formatter: function (params) {
             // return '56%';
             if (type) {
-              if (data.dataArr[0].value >= max) {
-                return (
-                  '{gray|' +
-                  data.rate +
-                  '\n' +
-                  '}{white|' +
-                  data.title +
-                  '}{b|}'
-                );
-              } else if (data.dataArr[0].value < min) {
-                return (
-                  '{gray|' +
-                         data.rate +
-                         '\n' +
-                         '}{white|' +
-                         data.title +
-                         '}{a|}'
-                );
+              if (data.rateData >= 1.2 / 1.5) {
+                return '{gray|' + data.rate + '\n' + '}{white|' + data.title + '}{b|}';
+              } else if (data.rateData < 1 / 1.5) {
+                return '{gray|' + data.rate + '\n' + '}{white|' + data.title + '}{a|}';
               } else {
-                return (
-                  '{gray|' +
-                         data.rate +
-                         '\n' +
-                         '}{white|' +
-                         data.title +
-                         '}'
-                );
+                return '{gray|' + data.rate + '\n' + '}{white|' + data.title + '}';
               }
             } else {
               return '{gray|' + data.rate + '\n' + '}{white|' + data.title + '}';

@@ -1,4 +1,4 @@
-export const baseAreaOption = (data = [], color = [], name = '', outOptions = { splitNumber: 4 }, unit = '', min, threshold) => {
+export const baseAreaOption = (data = [], color = [], name = '', outOptions = { splitNumber: 4 }, unit = '') => {
   return {
     color: [color[0]],
     tooltip: {
@@ -9,17 +9,10 @@ export const baseAreaOption = (data = [], color = [], name = '', outOptions = { 
       confine: true,
       formatter: function (params) {
         var relVal = params[0].name;
-        var Img = '';
+        // var Img = '';
         for (var i = 0, l = params.length; i < l; i++) {
-          Img = '';
-          if (parseFloat(params[i].value) > threshold) {
-            Img =
-              '<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>';
-          } else if (parseFloat(params[i].value) <= min) {
-            Img =
-              '<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>';
-          }
-          relVal += '<br/>' + params[i].seriesName + ' : ' + params[i].value + unit + Img;
+          // params[i].value > 42.5 ? Img = '<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>' : Img = '';
+          relVal += '<br/>' + params[i].seriesName + ' : ' + params[i].value + unit;
         }
         return relVal;
       },

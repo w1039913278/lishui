@@ -72,6 +72,9 @@ export const gardenEnt = [
   { value: 7, name: 'B档园区' },
   { value: 11, name: 'C档园区' },
   { value: 4, name: 'D档园区' }
+  // { value: 2, name: '三星级园区' },
+  // { value: 15, name: '二星级园区' },
+  // { value: 3, name: '一星级园区' }
 ];
 // 减税完成情况
 export const taxReduction = [
@@ -81,6 +84,17 @@ export const taxReduction = [
 ];
 // 减费完成情况
 export const costList = [
+  // { value: 114.52, name: '社保费减免' },
+  // { value: 100, name: '失业保险稳岗返还' },
+  // { value: 105.06, name: '降低失业保险费率' },
+  // { value: 277.9, name: '降低工伤保险费率' },
+  // { value: 95.56, name: '水、电、气费减免' },
+  // { value: 130.56, name: '检测费用减免' },
+  // { value: 156.14, name: '取消采购文件工本费' },
+  // { value: 193.11, name: '政策性融资担保政策减费' },
+  // { value: 204.19, name: '残保金减免' },
+  // { value: 100, name: '文化事业建设费减免' }
+
   { name: '社保费减免', value: 13.91 },
   { name: '失业保险稳岗返还', value: 2.4 },
   { name: '降低失业保险费率', value: 1.47 },
@@ -95,6 +109,10 @@ export const costList = [
 
 // 减租完成情况
 export const rentList = [
+  // { value: 100, name: '国有企业租金减免' },
+  // { value: 100, name: '行政事业单位租金减免' },
+  // { value: 138.26, name: '市场运营主体承租户减租' }
+
   { name: '国有企业租金减免', value: 0.56 },
   { name: '行政事业单位租金减免', value: 0.21 },
   { name: '市场运营主体承租户减租', value: 0.83 }

@@ -1,11 +1,107 @@
 /**
  * @desc 前端常用工具方法
  */
+/**
+ *  echarts tooltip 自动轮播
+ *  @author liuwei
+ *  @param myChart  //初始化echarts的实例
+ *  @param option   //指定图表的配置项和数据
+ *  @param num      //类目数量(原因：循环时达到最大值后，使其从头开始循环)
+ *  @param time     //轮播间隔时长
+ */
+export function autoHover(myChart, option, num, time) {
+  var defaultData = {
+    // 设置默认值
+    time: 2000,
+    num: 0
+  };
+  if (!time) {
+    time = defaultData.time;
+  }
+  if (!num) {
+    num = defaultData.num;
+  }
+
+  var count = 0;
+  var timeTicket = null;
+  timeTicket && clearInterval(timeTicket);
+  timeTicket = setInterval(function () {
+    myChart.dispatchAction({
+      type: 'downplay',
+      seriesIndex: 0, // serieIndex的索引值   可以触发多个
+      dataIndex: count
+    });
+    count = count % num; // 增加
+    myChart.dispatchAction({
+      type: 'highlight',
+      seriesIndex: 0,
+      dataIndex: count
+    });
+    myChart.dispatchAction({
+      type: 'showTip',
+      seriesIndex: 0,
+      dataIndex: count
+    });
+    count++;
+    if (count >= num) {
+      count = 0;
+    }
+  }, time);
+  myChart.on('mouseover', function (params) {
+    clearInterval(timeTicket);
+    myChart.dispatchAction({
+      type: 'downplay',
+      seriesIndex: 0
+    });
+    myChart.dispatchAction({
+      type: 'highlight',
+      seriesIndex: 0,
+      dataIndex: params.dataIndex
+    });
+    myChart.dispatchAction({
+      type: 'showTip',
+      seriesIndex: 0,
+      dataIndex: params.dataIndex
+    });
+  });
+
+  myChart.on('mouseout', function () {
+    timeTicket && clearInterval(timeTicket);
+    timeTicket = setInterval(function () {
+      myChart.dispatchAction({
+        type: 'downplay',
+        seriesIndex: 0 // serieIndex的索引值   可以触发多个
+      });
+      myChart.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: count
+      });
+      myChart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: count
+      });
+      count++;
+      if (count >= 17) {
+        count = 0;
+      }
+    }, 3000);
+  });
+}
 
 export function timeFix() {
   const time = new Date();
   const hour = time.getHours();
-  return hour < 9 ? '早上好' : hour <= 11 ? '上午好' : hour <= 13 ? '中午好' : hour < 20 ? '下午好' : '晚上好';
+  return hour < 9
+    ? '早上好'
+    : hour <= 11
+      ? '上午好'
+      : hour <= 13
+        ? '中午好'
+        : hour < 20
+          ? '下午好'
+          : '晚上好';
 }
 
 // 来源对象覆盖目标源对象
@@ -72,12 +168,12 @@ export const jsonArrayFilter = (user = {}, filterArray = []) => {
 };
 
 // 字符数字转int数字
-export const strNumToInt = (val) => {
+export const strNumToInt = val => {
   return +val;
 };
 // int数字转字符数字
-export const intNumToStr = (val) => {
-  return (val).toString();
+export const intNumToStr = val => {
+  return val.toString();
 };
 
 // 自定义错误 继承Error对象
@@ -90,7 +186,7 @@ userError.prototype = new Error();
 userError.prototype.constructor = userError;
 
 // 字符时间转Date类型
-export const formatToDate = (dateStr) => {
+export const formatToDate = dateStr => {
   if (isNotEmpty(dateStr)) {
     return new Date(Date.parse(dateStr.replace(/-/g, '/')));
   }
@@ -98,7 +194,7 @@ export const formatToDate = (dateStr) => {
 };
 
 // 判断参数是否为空
-export const isNotEmpty = (str) => {
+export const isNotEmpty = str => {
   if (str !== '' && str !== null && typeof str !== 'undefined') {
     return true;
   }
@@ -107,7 +203,7 @@ export const isNotEmpty = (str) => {
 };
 
 // 判断对象是否为空对象
-export const isEmptyObject = (obj) => {
+export const isEmptyObject = obj => {
   for (var key in obj) {
     return false;
   }
@@ -125,102 +221,104 @@ export const strHavestr = (str, regStr) => {
 };
 
 // 邮箱
-export const isEmail = (s) => {
-  return /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(s);
+export const isEmail = s => {
+  return /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(
+    s
+  );
 };
 
 // 手机号码
-export const isMobilePhone = (s) => {
+export const isMobilePhone = s => {
   return /^1[0-9]{10}$/.test(s);
 };
 
 // 电话号码
-export const isPhone = (s) => {
+export const isPhone = s => {
   return /^([0-9]{3,4}-)?[0-9]{7,8}$/.test(s);
 };
 
 // 是否url地址
-export const isURL = (s) => {
+export const isURL = s => {
   return /^http[s]?:\/\/.*/.test(s);
 };
 
 // 是否字符串
-export const isString = (o) => {
+export const isString = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'String';
 };
 
 // 是否数字
-export const isNumber = (o) => {
+export const isNumber = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Number';
 };
 
 // 是否boolean
-export const isBoolean = (o) => {
+export const isBoolean = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Boolean';
 };
 
 // 是否函数
-export const isFunction = (o) => {
+export const isFunction = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Function';
 };
 
 // 是否为null
-export const isNull = (o) => {
+export const isNull = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Null';
 };
 
 // 是否undefined
-export const isUndefined = (o) => {
+export const isUndefined = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Undefined';
 };
 
 // 是否对象
-export const isObj = (o) => {
+export const isObj = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Object';
 };
 
 // 是否数组
-export const isArray = (o) => {
+export const isArray = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Array';
 };
 
 // 是否时间
-export const isDate = (o) => {
+export const isDate = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Date';
 };
 
 // 是否正则
-export const isRegExp = (o) => {
+export const isRegExp = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'RegExp';
 };
 
 // 是否错误对象
-export const isError = (o) => {
+export const isError = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Error';
 };
 
 // 是否Symbol函数
-export const isSymbol = (o) => {
+export const isSymbol = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Symbol';
 };
 
 // 是否Promise对象
-export const isPromise = (o) => {
+export const isPromise = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Promise';
 };
 
 // 是否Set对象
-export const isSet = (o) => {
+export const isSet = o => {
   return Object.prototype.toString.call(o).slice(8, -1) === 'Set';
 };
 
 // 去除html标签
-export const removeHtmltag = (str) => {
+export const removeHtmltag = str => {
   return str.replace(/<[^>]+>/g, '');
 };
 
 // 获取url参数
-export const getQueryString = (name) => {
+export const getQueryString = name => {
   const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
   const search = window.location.search.split('?')[1] || '';
   const r = search.match(reg) || [];
@@ -228,7 +326,7 @@ export const getQueryString = (name) => {
 };
 
 // 动态引入js
-export const injectScript = (src) => {
+export const injectScript = src => {
   const s = document.createElement('script');
   s.type = 'text/javascript';
   s.async = true;
@@ -278,7 +376,7 @@ export const scrollToTop = () => {
 };
 
 // 返回顶部的通用方法 backTop("goTop");
-export const backTop = (btnId) => {
+export const backTop = btnId => {
   var btn = document.getElementById(btnId);
   var d = document.documentElement;
   var b = document.body;
@@ -290,7 +388,9 @@ export const backTop = (btnId) => {
     this.timer = setInterval(function () {
       d.scrollTop -= Math.ceil((d.scrollTop + b.scrollTop) * 0.1);
       b.scrollTop -= Math.ceil((d.scrollTop + b.scrollTop) * 0.1);
-      if (d.scrollTop + b.scrollTop === 0) { clearInterval(btn.timer, (window.onscroll = set)); }
+      if (d.scrollTop + b.scrollTop === 0) {
+        clearInterval(btn.timer, (window.onscroll = set));
+      }
     }, 10);
   };
   function set() {
@@ -303,13 +403,14 @@ export const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
   const { top, left, bottom, right } = el.getBoundingClientRect();
   const { innerHeight, innerWidth } = window;
   return partiallyVisible
-    ? ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) &&
-    ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
+    ? ((top > 0 && top < innerHeight) ||
+        (bottom > 0 && bottom < innerHeight)) &&
+        ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
     : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
 };
 
 // 洗牌算法随机
-export const shuffle = (arr) => {
+export const shuffle = arr => {
   var result = [];
   var random;
   while (arr.length > 0) {
@@ -321,7 +422,7 @@ export const shuffle = (arr) => {
 };
 
 // 拦截粘贴板
-export const copyTextToClipboard = (value) => {
+export const copyTextToClipboard = value => {
   var textArea = document.createElement('textarea');
   textArea.style.background = 'transparent';
   textArea.value = value;
@@ -331,7 +432,7 @@ export const copyTextToClipboard = (value) => {
     // eslint-disable-next-line no-unused-vars
     var successful = document.execCommand('copy');
   } catch (err) {
-    // console.log('Oops, unable to copy');
+    console.log('Oops, unable to copy');
   }
   document.body.removeChild(textArea);
 };
@@ -356,11 +457,19 @@ export const checkStr = (str, type) => {
   case 'money': // 金额(小数点2位)
     return /^\d*(?:\.\d{0,2})?$/.test(str);
   case 'URL': // 网址
-    return /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\\.,@?^=%&:/~\\+#]*[\w\-\\@?^=%&/~\\+#])?/.test(str);
+    return /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\\.,@?^=%&:/~\\+#]*[\w\-\\@?^=%&/~\\+#])?/.test(
+      str
+    );
   case 'IP': // IP
-    return /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(str);
+    return /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(
+      str
+    );
   case 'date': // 日期时间
-    return /^(\d{4})\\-(\d{2})\\-(\d{2}) (\d{2})(?:\\:\d{2}|:(\d{2}):(\d{2}))$/.test(str) || /^(\d{4})\\-(\d{2})\\-(\d{2})$/.test(str);
+    return (
+      /^(\d{4})\\-(\d{2})\\-(\d{2}) (\d{2})(?:\\:\d{2}|:(\d{2}):(\d{2}))$/.test(
+        str
+      ) || /^(\d{4})\\-(\d{2})\\-(\d{2})$/.test(str)
+    );
   case 'number': // 数字
     return /^[0-9]$/.test(str);
   case 'english': // 英文
@@ -379,22 +488,67 @@ export const checkStr = (str, type) => {
 };
 
 // 严格的身份证校验
-export const isCardID = (sId) => {
+export const isCardID = sId => {
   if (!/(^\d{15}$)|(^\d{17}(\d|X|x)$)/.test(sId)) {
     console.log('你输入的身份证长度或格式错误');
     return false;
   }
   // 身份证城市
-  var aCity = { 11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内蒙古', 21: '辽宁', 22: '吉林', 23: '黑龙江', 31: '上海', 32: '江苏', 33: '浙江', 34: '安徽', 35: '福建', 36: '江西', 37: '山东', 41: '河南', 42: '湖北', 43: '湖南', 44: '广东', 45: '广西', 46: '海南', 50: '重庆', 51: '四川', 52: '贵州', 53: '云南', 54: '西藏', 61: '陕西', 62: '甘肃', 63: '青海', 64: '宁夏', 65: '新疆', 71: '台湾', 81: '香港', 82: '澳门', 91: '国外' };
+  var aCity = {
+    11: '北京',
+    12: '天津',
+    13: '河北',
+    14: '山西',
+    15: '内蒙古',
+    21: '辽宁',
+    22: '吉林',
+    23: '黑龙江',
+    31: '上海',
+    32: '江苏',
+    33: '浙江',
+    34: '安徽',
+    35: '福建',
+    36: '江西',
+    37: '山东',
+    41: '河南',
+    42: '湖北',
+    43: '湖南',
+    44: '广东',
+    45: '广西',
+    46: '海南',
+    50: '重庆',
+    51: '四川',
+    52: '贵州',
+    53: '云南',
+    54: '西藏',
+    61: '陕西',
+    62: '甘肃',
+    63: '青海',
+    64: '宁夏',
+    65: '新疆',
+    71: '台湾',
+    81: '香港',
+    82: '澳门',
+    91: '国外'
+  };
   if (!aCity[parseInt(sId.substr(0, 2))]) {
     console.log('你的身份证地区非法');
     return false;
   }
 
   // 出生日期验证
-  var sBirthday = (sId.substr(6, 4) + '-' + Number(sId.substr(10, 2)) + '-' + Number(sId.substr(12, 2))).replace(/-/g, '/');
+  var sBirthday = (
+    sId.substr(6, 4) +
+    '-' +
+    Number(sId.substr(10, 2)) +
+    '-' +
+    Number(sId.substr(12, 2))
+  ).replace(/-/g, '/');
   var d = new Date(sBirthday);
-  if (sBirthday !== (d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate())) {
+  if (
+    sBirthday !==
+    d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate()
+  ) {
     console.log('身份证上的出生日期非法');
     return false;
   }
@@ -419,14 +573,14 @@ export const isCardID = (sId) => {
 export const random = (min, max) => {
   // eslint-disable-next-line no-undef
   if (arguments.length === 2) {
-    return Math.floor(min + Math.random() * ((max + 1) - min));
+    return Math.floor(min + Math.random() * (max + 1 - min));
   } else {
     return null;
   }
 };
 
 // 将阿拉伯数字翻译成中文的大写数字
-export const numberToChinese = (num) => {
+export const numberToChinese = num => {
   var AA = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十']; // new Array('零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十');
   var BB = ['', '十', '百', '仟', '萬', '億', '点', '']; // new Array('', '十', '百', '仟', '萬', '億', '点', '');
   var a = ('' + num).replace(/(^0*)/g, '').split('.');
@@ -438,8 +592,9 @@ export const numberToChinese = (num) => {
       re = BB[7] + re;
       break;
     case 4:
-      if (!new RegExp('0{4}//d{' + (a[0].length - i - 1) + '}$')
-        .test(a[0])) { re = BB[4] + re; }
+      if (!new RegExp('0{4}//d{' + (a[0].length - i - 1) + '}$').test(a[0])) {
+        re = BB[4] + re;
+      }
       break;
     case 8:
       re = BB[5] + re;
@@ -447,35 +602,46 @@ export const numberToChinese = (num) => {
       k = 0;
       break;
     }
-    if (k % 4 === 2 && a[0].charAt(i + 2) !== 0 && a[0].charAt(i + 1) === 0) { re = AA[0] + re; }
-    if (a[0].charAt(i) !== 0) { re = AA[a[0].charAt(i)] + BB[k % 4] + re; }
+    if (k % 4 === 2 && a[0].charAt(i + 2) !== 0 && a[0].charAt(i + 1) === 0) {
+      re = AA[0] + re;
+    }
+    if (a[0].charAt(i) !== 0) {
+      re = AA[a[0].charAt(i)] + BB[k % 4] + re;
+    }
     k++;
   }
 
   if (a.length > 1) {
     // 加上小数部分(如果有小数部分)
     re += BB[6];
-    for (var n = 0; n < a[1].length; n++) { re += AA[a[1].charAt(n)]; }
+    for (var n = 0; n < a[1].length; n++) {
+      re += AA[a[1].charAt(n)];
+    }
   }
-  if (re === '一十') { re = '十'; }
-  if (re.match(/^一/) && re.length === 3) { re = re.replace('一', ''); }
+  if (re === '一十') {
+    re = '十';
+  }
+  if (re.match(/^一/) && re.length === 3) {
+    re = re.replace('一', '');
+  }
   return re;
 };
 
 // 将数字转换为大写金额
-export const changeToChinese = (Num) => {
+export const changeToChinese = Num => {
   // 判断如果传递进来的不是字符的话转换为字符
   if (typeof Num === 'number') {
     // eslint-disable-next-line no-new-wrappers
     Num = new String(Num);
-  };
+  }
   Num = Num.replace(/,/g, ''); // 替换tomoney()中的“,”
   Num = Num.replace(/ /g, ''); // 替换tomoney()中的空格
   Num = Num.replace(/￥/g, ''); // 替换掉可能出现的￥字符
-  if (isNaN(Num)) { // 验证输入的字符是否为数字
+  if (isNaN(Num)) {
+    // 验证输入的字符是否为数字
     // alert("请检查小写金额是否正确");
     return '';
-  };
+  }
   // 字符处理完毕后开始转换，采用前后两部分分别转换
   var part = String(Num).split('.');
   var newchar = '';
@@ -601,7 +767,9 @@ export const changeToChinese = (Num) => {
     }
   }
   // 替换所有无用汉字
-  while (newchar.search('零零') !== -1) { newchar = newchar.replace('零零', '零'); }
+  while (newchar.search('零零') !== -1) {
+    newchar = newchar.replace('零零', '零');
+  }
   newchar = newchar.replace('零亿', '亿');
   newchar = newchar.replace('亿万', '亿');
   newchar = newchar.replace('零万', '万');
@@ -635,12 +803,13 @@ export const sort = (arr, type = 1) => {
   });
 };
 // 去重
-export const unique = (arr) => {
+export const unique = arr => {
   // eslint-disable-next-line no-prototype-builtins
   if (Array.hasOwnProperty('from')) {
     return Array.from(new Set(arr));
   } else {
-    var n = {}; var r = [];
+    var n = {};
+    var r = [];
     for (var i = 0; i < arr.length; i++) {
       if (!n[arr[i]]) {
         n[arr[i]] = true;
@@ -676,35 +845,35 @@ export const remove = (arr, ele) => {
 };
 
 // 将类数组转换为数组
-export const formArray = (ary) => {
+export const formArray = ary => {
   var arr = [];
   if (Array.isArray(ary)) {
     arr = ary;
   } else {
     arr = Array.prototype.slice.call(ary);
-  };
+  }
   return arr;
 };
 
 // 最大值
-export const max = (arr) => {
+export const max = arr => {
   return Math.max.apply(null, arr);
 };
 
 // 最小值
-export const min = (arr) => {
+export const min = arr => {
   return Math.min.apply(null, arr);
 };
 
 // 求和
-export const sum = (arr) => {
+export const sum = arr => {
   return arr.reduce((pre, cur) => {
     return pre + cur;
   });
 };
 
 // 平均值
-export const average = (arr) => {
+export const average = arr => {
   return this.sum(arr) / arr.length;
 };
 
@@ -731,20 +900,27 @@ export const changeCase = (str, type) => {
   switch (type) {
   case 1:
     return str.replace(/\b\w+\b/g, function (word) {
-      return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+      return (
+        word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase()
+      );
     });
   case 2:
     return str.replace(/\b\w+\b/g, function (word) {
-      return word.substring(0, 1).toLowerCase() + word.substring(1).toUpperCase();
+      return (
+        word.substring(0, 1).toLowerCase() + word.substring(1).toUpperCase()
+      );
     });
   case 3:
-    return str.split('').map(function (word) {
-      if (/[a-z]/.test(word)) {
-        return word.toUpperCase();
-      } else {
-        return word.toLowerCase();
-      }
-    }).join('');
+    return str
+      .split('')
+      .map(function (word) {
+        if (/[a-z]/.test(word)) {
+          return word.toUpperCase();
+        } else {
+          return word.toLowerCase();
+        }
+      })
+      .join('');
   case 4:
     return str.toUpperCase();
   case 5:
@@ -755,7 +931,7 @@ export const changeCase = (str, type) => {
 };
 
 // 检测密码强度
-export const checkPwd = (str) => {
+export const checkPwd = str => {
   var Lv = 0;
   if (str.length < 6) {
     return Lv;
@@ -813,7 +989,8 @@ export const colorToRGB = (val, opa) => {
   var pattern = /^(#?)[a-fA-F0-9]{6}$/; // 16进制颜色值校验规则
   var isOpa = typeof opa === 'number'; // 判断是否有设置不透明度
 
-  if (!pattern.test(val)) { // 如果值不符合规则返回空字符
+  if (!pattern.test(val)) {
+    // 如果值不符合规则返回空字符
     return '';
   }
 
@@ -828,12 +1005,13 @@ export const colorToRGB = (val, opa) => {
   }
 
   rgbStr = rgbArr.join();
-  rgbStr = 'rgb' + (isOpa ? 'a' : '') + '(' + rgbStr + (isOpa ? ',' + opa : '') + ')';
+  rgbStr =
+    'rgb' + (isOpa ? 'a' : '') + '(' + rgbStr + (isOpa ? ',' + opa : '') + ')';
   return rgbStr;
 };
 
 // 检测sql攻击
-export const checkSQLXss = (sQuery) => {
+export const checkSQLXss = sQuery => {
   const re = /select|update|delete|truncate|join|union|exec|insert|drop|count|script|<|>|'|"|=|;/gi;
   if (re.test(sQuery)) {
     return false;
@@ -842,14 +1020,18 @@ export const checkSQLXss = (sQuery) => {
 };
 
 // 特殊字符检测
-export const checkInvalidChar = (val) => {
-  var reg = new RegExp('[`~!@#$^&*()=|{}\':;\',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“\'。，、？]');
+export const checkInvalidChar = val => {
+  var reg = new RegExp(
+    '[`~!@#$^&*()=|{}\':;\',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“\'。，、？]'
+  );
   return reg.test(val);
 };
 
 // 过滤特殊字符
-export const removeInvalidChar = (val) => {
-  var reg = new RegExp('[`~!@#$^&*()=|{}\':;\',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“\'。，、？]');
+export const removeInvalidChar = val => {
+  var reg = new RegExp(
+    '[`~!@#$^&*()=|{}\':;\',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“\'。，、？]'
+  );
   var rs = '';
   for (var i = 0, len = val.length; i < len; i++) {
     rs = rs + val.substr(i, 1).replace(reg, '');

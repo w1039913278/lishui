@@ -89,17 +89,20 @@ export const ManufactureEconomicDevelopComprehensiveData = {
 };
 
 // 企业上云完成情况
-export const enterpriseUpDayData = [
-  { name: '莲都区', value: 0 },
-  { name: '青田县', value: 0 },
-  { name: '缙云县', value: 0 },
-  { name: '遂昌县', value: 0 },
-  { name: '松阳县', value: 0 },
-  { name: '云和县', value: 0 },
-  { name: '庆元县', value: 0 },
-  { name: '景宁县', value: 0 },
-  { name: '龙泉市', value: 0 }
-];
+export const enterpriseUpDayData = {
+  name: '企业上云完成情况',
+  value: [
+    { area: '莲都区', new_cloud_ent: 284, new_cloud_rate: '24.85%' },
+    { area: '青田县', new_cloud_ent: 163, new_cloud_rate: '14.26%' },
+    { area: '缙云县', new_cloud_ent: 167, new_cloud_rate: '14.61%' },
+    { area: '遂昌县', new_cloud_ent: 28, new_cloud_rate: '2.45%' },
+    { area: '松阳县', new_cloud_ent: 86, new_cloud_rate: '7.52%' },
+    { area: '云和县', new_cloud_ent: 60, new_cloud_rate: '5.25%' },
+    { area: '庆元县', new_cloud_ent: 125, new_cloud_rate: '10.94%' },
+    { area: '景宁县', new_cloud_ent: 56, new_cloud_rate: '4.90%' },
+    { area: '龙泉市', new_cloud_ent: 174, new_cloud_rate: '15.22%' }
+  ]
+};
 
 // 中间地图数据
 // 核心制造业增加值
@@ -133,14 +136,14 @@ export const zzyMapData = [
     type: 'Manufacturing_value_added'
   },
   {
-    name: '龙泉市',
+    name: '龙泉市  ',
     value: 0.68313,
     lng: 119.141461,
     lat: 28.104623,
     type: 'Manufacturing_value_added'
   },
   {
-    name: '青田县',
+    name: '青田县  ',
     value: 1.49625,
     lng: 120.289277,
     lat: 28.179695,

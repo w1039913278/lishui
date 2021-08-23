@@ -5,43 +5,31 @@ var myMixin = {
   data() {
     // 数据专题
     this.titleQuotaFieldObj = {
-      zt_hy: '专题页面意义',
+      ztyy: '专题页面意义',
       qtdw: '牵头单位',
       xtdw: '协同单位',
-      zt_fgld: '牵头单位分管领导及手机全号',
-      zt_ywfzr: '牵头单位业务负责人及手机全号',
-      zt_sjzy: '牵头单位数据专员及手机全号',
-      zt_sl: '页面指标数量',
+      qtdwfgld: '牵头单位分管领导及手机全号',
+      qtdwfzr: '牵头单位业务负责人及手机全号',
+      qtdwsjzy: '牵头单位数据专员及手机全号',
+      zbxsl: '页面指标数量',
       name: '专题名称',
       bz: '备注'
     };
     // 指标
     this.quotaFieldObj = {
-      zb_dw: '数据提供单位',
-      sjyfs: '数据来源方式',
+      lybm: '数据提供单位',
+      sjly: '数据来源方式',
       fgld: '数据提供单位分管领导及手机全号',
-      sjjrfs: '数据接入方式',
+      sjjr: '数据接入方式',
       ywfzr: '数据提供单位业务负责人及手机全号',
-      sjgxfs: '数据更新方式',
+      gxfs: '数据更新方式',
       gxpl: '更新频率',
-      t: '更新时间',
-      cjfz: '触警阈值',
-      yzfz: '优质阈值',
+      gxsj: '更新时间',
+      cjyz: '触警阈值',
+      yzyy: '优质阈值',
       cjcs: '预警显示方式及措施',
       name: '指标名称',
-      zb_hy: '指标意义'
-
-      // zb_dw: '来源部门',
-      // t: '更新时间',
-      // gxpl: '更新频率',
-      // sjyfs: '更新方式',
-      // ywfzr: '业务负责人及联系方式',
-      // fgld: '分管领导及联系方式',
-      // yzyy: '优质阈值',
-      // cjyz: '触警阈值',
-      // cjcs: '预警显示方式及措施',
-      // name: '指标名称',
-      // zb_hy: '指标意义'
+      zbyy: '指标意义'
     };
     return {
       showDetailTitle: '',
@@ -52,16 +40,13 @@ var myMixin = {
       params: {}
     };
   },
-  created() {},
+  created() {
+
+  },
   watch: {
     activeName(v) {
       if (Object.keys(this.params).length) {
-        this.openDetailHandle(
-          this.params.data,
-          this.params.isShowTitle,
-          this.params.singleRowFields,
-          this.params.tabs
-        );
+        this.openDetailHandle(this.params.data, this.params.isShowTitle, this.params.singleRowFields, this.params.tabs);
       }
     }
   },
@@ -85,7 +70,7 @@ var myMixin = {
     openDetailHandle(
       data = [],
       isShowTitle = true,
-      singleRowFields = ['zb_hy'],
+      singleRowFields = ['zbyy'],
       tabs = []
     ) {
       // if (this.isDetail) {
@@ -153,12 +138,7 @@ var myMixin = {
         );
         if (_includes(singleRowFields, keyName)) {
           // 单行展示
-          let textList;
-          if (_get(data, keyName, '')) {
-            textList = _get(data, keyName, '').split(/\d[.、]/);
-          } else {
-            textList = [];
-          }
+          const textList = _get(data, keyName, '').split(/\d[.、]/);
           singleRowData.push([{ id: i + 10001, text, value: textList }]);
         } else {
           // 一行展示两个
@@ -176,7 +156,10 @@ var myMixin = {
         }
       }
       if (twoRowData.length === 1) {
-        conformityData.push([twoRowData[0], { id: '', text: '', value: '' }]);
+        conformityData.push([
+          twoRowData[0],
+          { id: '', text: '', value: '' }
+        ]);
         twoRowData = [];
       }
       conformityData.push(...singleRowData);

@@ -34,9 +34,6 @@ const configObj = {
     indent: ["error", 2, {
       SwitchCase: 1
     }],
-    // indent: [2, 2, {
-    //   'SwitchCase': 1
-    // }],
     semi: ["error", "always"],
     "space-before-function-paren": [
       "error",

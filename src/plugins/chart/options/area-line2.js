@@ -1,4 +1,4 @@
-export const baseArea2Option = (data = [], color = [], name = '', outOptions = { splitNumber: 4 }, unit = '', min, threshold) => {
+export const baseArea2Option = (data = [], color = [], name = '', outOptions = { splitNumber: 4 }, unit = '') => {
   return {
     color: [color[0]],
     tooltip: {
@@ -11,13 +11,7 @@ export const baseArea2Option = (data = [], color = [], name = '', outOptions = {
         var relVal = params[0].name;
         var Img = '';
         for (var i = 0, l = params.length; i < l; i++) {
-          Img = '';
-          if (parseFloat(params[i].value) > threshold) {
-            Img = '<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>';
-          } else if (parseFloat(params[i].value) <= min) {
-            Img = '<img src="/static/images/exclamatory-mark.png" style="width:15px;height:15px;"></img>';
-          }
-          // params[i].value > threshold ? Img = '<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>' : Img = '';
+          params[i].value > 42.5 ? Img = '<img src="/static/images/thumbs-up.png" style="width:15px;height:15px;"></img>' : Img = '';
           relVal += '<br/>' + params[i].seriesName + ' : ' + params[i].value + unit + Img;
         }
         return relVal;
