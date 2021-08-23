@@ -1,0 +1,57 @@
+/* Dropdown 下拉面板菜单 */
+@drop-column-down-height: 40px;
+
+.base-drop-column-down {
+  cursor: pointer;
+}
+.base-drop-column-down-menu {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  font-size: @font-size-medium;
+  // color: #999;
+  .weight-black-color-fn(0.45);
+  padding: 20px 18px;
+  & > div {
+    flex-grow: 1; /* 平分父级 .base-drop-column-down-box 的宽度 */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0px 8px;
+    width: 151px;
+    .title {
+      .weight-black-color-fn(0.85);
+      font-size: @font-size-large;
+      font-weight: @title-font-weight;
+      // padding: 5px 0px;
+      cursor: auto;
+    }
+  }
+  & > div div {
+    // padding: 5px 0px;
+    cursor: pointer;
+  }
+  & > div div div:not(.title):hover {
+    // color: #4b8bf4;
+    .weight-black-color-fn(0.85);
+    background-color:  rgba(243, 243, 244, 1);
+  }
+  .column > div {
+    flex-grow: 0;
+    &:not(:last-child){
+      padding-bottom: 20px;
+    }
+    > div{
+      height: @drop-column-down-height;
+      line-height: @drop-column-down-height;
+      padding-left: 20px;
+      box-sizing: border-box;
+      // background-color: pink;
+    }
+  }
+  .iconfont{
+    margin-right: 10px !important;
+  }
+}

@@ -1,0 +1,35 @@
+/* Dropdown 下拉菜单 */
+.base-drop-down .el-dropdown-link {
+  cursor: pointer;
+}
+.base-drop-down .el-icon-arrow-down {
+  font-size: @font-size-small;
+}
+
+/* 下拉悬浮面板 */
+.base-dropdown-menu {
+  padding: 0px 0;
+  .el-dropdown-menu__item {
+    box-sizing: border-box;
+    color: @dropDown-font-color;
+    font-size: @dropDown-font-size;
+    height: @dropDown-height;
+    line-height: @dropDown-height !important;
+    width: @dropDown-width;
+    text-align: center;
+  }
+}
+.base-dropdown-menu .el-dropdown-menu__item.el-dropdown-menu__item--divided {
+  margin-top: 0px;
+}
+.base-dropdown-menu
+  .el-dropdown-menu__item.el-dropdown-menu__item--divided:before {
+  height: 0px;
+}
+.el-dropdown-menu__item--divided:before {
+  height: 0px;
+}
+.el-dropdown-menu--mini .el-dropdown-menu__item {
+  // padding-left: @dropDown-tl-padding;
+  // padding-left: 20px;
+}

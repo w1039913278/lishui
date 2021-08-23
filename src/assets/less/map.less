@@ -1,0 +1,64 @@
+// 高德地图样式
+.custom-info-window {
+  display: flex;
+  border-radius: 18px;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 36px;
+  line-height: 36px;
+  padding: 0 15px;
+  color: rgba(255, 255, 255, 100);
+  &-park-name{
+    max-width: 600px;
+    .text-overflow;
+  }
+  &:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid rgba(0, 0, 0, 0.2);
+    display: block;
+    position: absolute;
+    top: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.amap-overlay-text-container {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+}
+.amap-marker-label {
+  border-radius: 18px;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 36px;
+  line-height: 36px;
+  padding: 0 24px;
+  color: #FAED3b;
+  border: none;
+  font-size: 20px;
+}
+.amap-overlay-text-container {
+  display: block;
+  width: auto;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: transparent;
+  padding: 2px 3px;
+  border: none;
+  border-radius: 3px;
+}
+.custom-info-window-park-name{
+  border-radius: 18px;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 36px;
+  line-height: 36px;
+  padding: 0 24px;
+  color: #FAED3b;
+  border: none;
+  font-size: 20px;
+}

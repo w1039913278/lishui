@@ -1,0 +1,64 @@
+@primaryColor: #3e7eff;
+@deepBlueColor: #1b68fd;
+@gray: #f3f5f7;
+
+@gray-border: 1px solid rgba(220, 223, 230, 1);
+@tab-border: 2px solid #e4e7ed;
+@paddingWidth: 21px;
+
+.base-condtion-item {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: @gray-border;
+  border-top: none;
+  padding: 5px 10px 5px 5px;
+  .el-input {
+    width: 140px;
+  }
+  .el-date-editor {
+    width: 200px;
+  }
+  .el-button--text {
+    padding: 0;
+  }
+  .el-tag + .el-tag {
+    margin-left: 10px;
+  }
+}
+.formula_input {
+  display: inline-block;
+}
+
+.base-condition {
+  display: table;
+  width: 100%;
+  border-top: @gray-border;
+  & & {
+    border-top: none;
+  }
+
+  &_operator {
+    display: table-cell;
+    width: 32px;
+    text-align: center;
+    border-left: @gray-border;
+    border-bottom: @gray-border;
+    vertical-align: middle;
+    color: rgba(144, 147, 153, 1);
+    font-size: 12px;
+    font-family: PingFangSC-Regular;
+    &-text {
+      cursor: pointer;
+
+      .iconqiehuan {
+        color: #3e7eff;
+        font-size: 13px;
+      }
+    }
+  }
+  &_child {
+    flex: 1;
+  }
+}

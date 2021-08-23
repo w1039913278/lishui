@@ -1,0 +1,69 @@
+/* tree 树 */
+.base-tree-el-scrollbar{
+  height: 100%;
+  .el-scrollbar__wrap {
+    overflow-x: hidden;
+    /* margin-right: 0px !important;
+    margin-bottom: 0px !important;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    overflow: hidden; */
+  }
+}
+.base-tree {
+  > .el-tree-node {
+    min-width: 100%;
+    display: inline-block;
+  }
+  // elementUI Tree 选中节点背景色修改
+  .el-tree-node.is-current > .el-tree-node__content {
+    background-color: #cde6ff !important;
+    .el-input__count-inner {
+      background-color: #cde6ff;
+    }
+  }
+  .el-tree-node__content {
+    height: 30px;
+    position: relative;
+    &:hover {
+      color: rgba(0, 0, 0, 1);
+      background-color: rgba(224,240,255, 1);
+    }
+  }
+}
+.handle-menu-tree-node {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  padding-right: 8px;
+}
+.base-tree-node-item {
+  padding-right: 5px;
+  box-sizing: border-box;
+  > div:nth-child(2) {
+    display: none;
+    .confirm-btn {
+      color: #0080ff;
+    }
+    .cancel-btn {
+    }
+    .confirm-btn,
+    .cancel-btn {
+      font-size: 14px;
+      padding-left: 4px;
+    }
+  }
+  input {
+    height: 21px !important;
+    line-height: 21px !important;
+    width: 80px !important;
+  }
+  .base-tree-node-edit-input {
+    > input:first-child {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+}

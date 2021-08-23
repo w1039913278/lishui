@@ -1,0 +1,34 @@
+/**
+ * @desc 下拉树面板
+ */
+ .base-select-tree {
+  position: relative;
+}
+.base-select-tree-down-empty + div {
+  border-bottom-color: transparent !important;
+}
+// 下拉 tree 的面板
+.el-popover {
+  // max-height: 360px;
+  // overflow: auto;
+  // padding: 10px;
+}
+.base-el-popover {
+  max-height: 400px;
+  overflow: hidden;
+  .base-tree-el-scrollbar{
+    max-height: 400px;
+    overflow: hidden !important;
+    .el-scrollbar__wrap{
+      max-height: 400px;
+    }
+  }
+}
+.select-tree-panel {
+  .el-tree-node__label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+  }
+}

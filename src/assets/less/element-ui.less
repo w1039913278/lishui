@@ -1,0 +1,19 @@
+// 修改element-ui样式
+
+// 主要按钮样式
+.el-button--primary {
+  color: #fff;
+  background-color: #0080ff;
+  border-color: #0080ff;
+}
+.el-dropdown-menu__item--divided {
+  &:nth-child(1) {
+    border-top: none;
+  }
+}
+.el-dropdown-menu--mini {
+  padding: 0;
+}
+.el-dropdown-menu--mini .el-dropdown-menu__item.el-dropdown-menu__item--divided:before {
+  height: 1px;
+}

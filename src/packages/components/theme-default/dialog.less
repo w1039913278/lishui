@@ -1,0 +1,27 @@
+/* 弹出框样式 */
+.base-el-dialog {
+  .el-dialog__header {
+    display: flex;
+    border-bottom: @border-weight;
+    padding: 0 !important;
+    height: 48px;
+    .el-dialog__title {
+      font-size: @font-size-large;
+      font-weight: @title-font-weight;
+      color: rgba(29, 31, 37, 100);
+      padding-left: 18px;
+      line-height: 48px;
+    }
+    .el-dialog__close {
+      position: absolute;
+      top: -2px;
+      right: -4px;
+    }
+  }
+  .el-dialog__footer {
+    height: 70px;
+    padding: 19px 21px;
+    border-top: @border-weight;
+    text-align: right;
+  }
+}

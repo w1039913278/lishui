@@ -1,0 +1,40 @@
+/* 按钮组 */
+.base-button-group {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  padding: 0px 10px;
+  > div{
+    margin-bottom: 27px;
+  }
+  & :hover {
+    // color: #4989F4;
+  }
+  .block-group-item {
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    font-size: 14px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    // background-color: pink;
+    padding: 0px 10px;
+    // border: 1px solid #cccccc;
+    box-sizing: border-box;
+    i {
+      padding: 0px 3px;
+    }
+  }
+  .active {
+    // background-color: rosybrown;
+    // background-image: url('@{assets}/images/header-active.png');
+    // background-repeat: no-repeat;
+    // background-position: left bottom;
+    // background-size: 100% 30%;
+  }
+}
